@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand palette — see docs/design-notes.md for contrast rules */
+  --color-navy: #14213d;
+  --color-navy-deep: #0e1626;
+  --color-gold: #b8924a;
+  --color-gold-light: #d9b872;
+  --color-gold-dark: #7a5a24;
+  --color-ivory: #f4eee2;
+  --color-ivory-light: #faf8f3;
+  --color-ink: #1a1a1a;
+  --color-muted: #5b6170;
+  --color-line: #e3dccd;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-montserrat), "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  --tracking-label: 0.14em;
+  --tracking-eyebrow: 0.3em;
+
+  --container-site: 80rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-ivory-light font-sans text-[15px] leading-[1.7] text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif leading-tight font-medium text-navy;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+
+  ::selection {
+    @apply bg-navy text-ivory;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Small uppercase gold label above section titles */
+  .eyebrow {
+    @apply text-[11px] font-semibold tracking-eyebrow text-gold-dark uppercase;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl font-medium tracking-[0.12em] text-navy uppercase sm:text-4xl;
+  }
+
+  .gold-rule {
+    @apply h-px w-16 bg-linear-to-r from-gold-dark via-gold-light to-gold-dark;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slide-out-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes slide-out-right {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
