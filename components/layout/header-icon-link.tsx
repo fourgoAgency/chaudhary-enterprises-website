@@ -11,7 +11,7 @@ type HeaderIconLinkProps = {
   className?: string;
 };
 
-// TODO(phase 4): pass live counts from the cart and wishlist stores.
+// TODO(phase 6): live wishlist count.
 export function HeaderIconLink({ href, label, icon: Icon, count, className }: HeaderIconLinkProps) {
   const hasCount = count !== undefined;
   const accessibleLabel = hasCount ? `${label}, ${count} ${count === 1 ? "item" : "items"}` : label;

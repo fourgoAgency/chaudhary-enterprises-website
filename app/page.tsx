@@ -177,7 +177,7 @@ export default async function HomePage() {
           <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
             {orderSteps.map((step, i) => (
               <li key={step.title} className="border-t border-ivory/25 pt-5">
-                <span className="font-serif text-lg text-gold-light tabular-nums">0{i + 1}</span>
+                <span className="text-sm font-semibold text-gold-light tabular-nums">0{i + 1}</span>
                 <h3 className="mt-2 font-sans text-base font-semibold text-ivory-light">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ivory/80">{step.body}</p>
               </li>

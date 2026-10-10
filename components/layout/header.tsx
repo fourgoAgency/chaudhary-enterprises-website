@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Heart, ShoppingBag, UserRound } from "lucide-react";
+import { Heart, UserRound } from "lucide-react";
 import { Logo, LogoMark } from "@/components/brand/logo";
+import { CartIconLink } from "@/components/layout/cart-icon-link";
 import { DesktopNav } from "@/components/layout/desktop-nav";
 import { HeaderIconLink } from "@/components/layout/header-icon-link";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -45,7 +46,7 @@ export async function Header() {
               className="hidden sm:inline-flex"
             />
             <HeaderIconLink href={routes.wishlist} label="Wishlist" icon={Heart} count={0} />
-            <HeaderIconLink href={routes.cart} label="Cart" icon={ShoppingBag} count={0} />
+            <CartIconLink />
           </div>
         </div>
       </StickyHeader>

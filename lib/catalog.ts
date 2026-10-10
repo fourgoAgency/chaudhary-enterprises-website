@@ -1,20 +1,12 @@
 import { categories } from "@/data/categories";
 import { products } from "@/data/products";
 import { getFromPrice } from "@/lib/pricing";
+import type { SortKey } from "@/lib/shop-params";
 import type { Category, CategorySlug, Product } from "@/lib/types";
 
 // Catalog data layer. Everything outside this file reads products through these async functions,
 // so the static data can later be swapped for a CMS (Sanity/Shopify) or the database without
 // touching pages or components.
-
-export const SORT_OPTIONS = [
-  { value: "featured", label: "Featured" },
-  { value: "price-asc", label: "Price: low to high" },
-  { value: "price-desc", label: "Price: high to low" },
-  { value: "newest", label: "Newest" },
-] as const;
-
-export type SortKey = (typeof SORT_OPTIONS)[number]["value"];
 
 export const DEFAULT_PER_PAGE = 12;
 
