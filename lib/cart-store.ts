@@ -25,11 +25,18 @@ type CartState = {
   setQuantity: (slug: string, quantity: number) => void;
   remove: (slug: string) => void;
   clear: () => void;
+  /** Refresh lines from current catalog data; products no longer sold are removed. Returns removed names. */
+  sync: (live: CartProduct[]) => string[];
 };
+
+/** Copy only the fields a cart line stores (callers may pass extra props such as stock). */
+function toLine({ slug, sku, name, image, moq, casePack, tiers }: CartProduct) {
+  return { slug, sku, name, image, moq, casePack, tiers };
+}
 
 export const useCart = create<CartState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       lines: [],
       add: (product, quantity) =>
         set((state) => {
@@ -38,12 +45,14 @@ export const useCart = create<CartState>()(
             return {
               lines: state.lines.map((l) =>
                 l.slug === product.slug
-                  ? { ...l, ...product, quantity: normalizeQuantity(product, l.quantity + quantity) }
+                  ? { ...l, ...toLine(product), quantity: normalizeQuantity(product, l.quantity + quantity) }
                   : l,
               ),
             };
           }
-          return { lines: [...state.lines, { ...product, quantity: normalizeQuantity(product, quantity) }] };
+          return {
+            lines: [...state.lines, { ...toLine(product), quantity: normalizeQuantity(product, quantity) }],
+          };
         }),
       setQuantity: (slug, quantity) =>
         set((state) => ({
@@ -51,6 +60,19 @@ export const useCart = create<CartState>()(
         })),
       remove: (slug) => set((state) => ({ lines: state.lines.filter((l) => l.slug !== slug) })),
       clear: () => set({ lines: [] }),
+      sync: (live) => {
+        const bySlug = new Map(live.map((p) => [p.slug, p]));
+        const { lines } = get();
+        const removed = lines.filter((l) => !bySlug.has(l.slug)).map((l) => l.name);
+        set({
+          lines: lines.flatMap((l) => {
+            const p = bySlug.get(l.slug);
+            if (!p) return [];
+            return [{ ...toLine(p), quantity: normalizeQuantity(p, l.quantity) }];
+          }),
+        });
+        return removed;
+      },
     }),
     { name: "ce-cart", version: 1, storage: createJSONStorage(() => localStorage) },
   ),

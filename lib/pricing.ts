@@ -76,3 +76,25 @@ export function priceLine(product: PricingInfo, quantity: number): LinePrice {
   const baseLineTotal = product.tiers[0].unitPrice * quantity;
   return { tierIndex, unitPrice, lineTotal, baseLineTotal, savings: baseLineTotal - lineTotal };
 }
+
+export type CartTotals = {
+  subtotal: number;
+  baseTotal: number;
+  savings: number;
+  units: number;
+};
+
+export function priceCart(lines: (PricingInfo & { quantity: number })[]): CartTotals {
+  return lines.reduce<CartTotals>(
+    (totals, line) => {
+      const p = priceLine(line, line.quantity);
+      return {
+        subtotal: totals.subtotal + p.lineTotal,
+        baseTotal: totals.baseTotal + p.baseLineTotal,
+        savings: totals.savings + p.savings,
+        units: totals.units + line.quantity,
+      };
+    },
+    { subtotal: 0, baseTotal: 0, savings: 0, units: 0 },
+  );
+}

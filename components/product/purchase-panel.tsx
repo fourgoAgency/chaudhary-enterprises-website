@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Minus, Plus } from "lucide-react";
+import { Check } from "lucide-react";
+import { QuantityStepper } from "@/components/product/quantity-stepper";
 import { Button } from "@/components/ui/button";
 import { useCart, type CartProduct } from "@/lib/cart-store";
-import { formatPrice, getTierRangeLabel, MAX_LINE_QUANTITY, normalizeQuantity, priceLine } from "@/lib/pricing";
+import { formatPrice, getTierRangeLabel, normalizeQuantity, priceLine } from "@/lib/pricing";
 import { routes, site } from "@/lib/site";
 import type { StockStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -17,8 +18,6 @@ type PurchasePanelProps = {
 export function PurchasePanel({ product }: PurchasePanelProps) {
   const add = useCart((s) => s.add);
   const [quantity, setQuantity] = useState(product.moq);
-  // Raw text while typing, so the field can be cleared and retyped; normalised on blur.
-  const [draft, setDraft] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
 
   const { tiers, moq, casePack } = product;
@@ -28,7 +27,6 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
 
   function commit(value: number) {
     setQuantity(normalizeQuantity(product, value));
-    setDraft(null);
     setAdded(false);
   }
 
@@ -98,41 +96,15 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           Quantity <span className="font-normal text-muted">(units, in multiples of {casePack})</span>
         </label>
         <div className="mt-2 flex flex-wrap items-center gap-4">
-          <div className="flex h-12 border border-navy/30 bg-white">
-            <button
-              type="button"
-              onClick={() => commit(quantity - casePack)}
-              disabled={quantity <= moq || outOfStock}
-              aria-label={`Remove one case (${casePack} units)`}
-              className="inline-flex w-12 items-center justify-center text-navy hover:bg-ivory disabled:text-muted/40 disabled:hover:bg-transparent"
-            >
-              <Minus className="size-4" aria-hidden />
-            </button>
-            <input
-              id="quantity"
-              type="number"
-              inputMode="numeric"
-              min={moq}
-              max={MAX_LINE_QUANTITY}
-              step={casePack}
-              value={draft ?? quantity}
-              disabled={outOfStock}
-              onChange={(e) => setDraft(e.target.value)}
-              onBlur={() => draft !== null && commit(Number(draft))}
-              onKeyDown={(e) => e.key === "Enter" && draft !== null && commit(Number(draft))}
-              aria-describedby="quantity-help"
-              className="w-20 border-x border-navy/30 text-center text-base font-semibold text-ink tabular-nums focus:outline-none [&::-webkit-inner-spin-button]:appearance-none"
-            />
-            <button
-              type="button"
-              onClick={() => commit(quantity + casePack)}
-              disabled={outOfStock}
-              aria-label={`Add one case (${casePack} units)`}
-              className="inline-flex w-12 items-center justify-center text-navy hover:bg-ivory disabled:text-muted/40"
-            >
-              <Plus className="size-4" aria-hidden />
-            </button>
-          </div>
+          <QuantityStepper
+            id="quantity"
+            value={quantity}
+            moq={moq}
+            casePack={casePack}
+            onChange={commit}
+            disabled={outOfStock}
+            aria-describedby="quantity-help"
+          />
           <p id="quantity-help" className="text-sm text-muted">
             {quantity / casePack} {quantity / casePack === 1 ? "case" : "cases"}
           </p>
