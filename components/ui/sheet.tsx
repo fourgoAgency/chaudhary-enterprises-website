@@ -25,11 +25,11 @@ export function SheetContent({
 }: SheetContentProps) {
   return (
     <SheetPrimitive.Portal>
-      <SheetPrimitive.Overlay className="fixed inset-0 z-50 bg-navy-deep/60 data-[state=closed]:animate-[fade-out_200ms] data-[state=open]:animate-[fade-in_200ms]" />
+      <SheetPrimitive.Overlay className="fixed inset-0 z-50 bg-black/60 data-[state=closed]:animate-[fade-out_200ms] data-[state=open]:animate-[fade-in_200ms]" />
       <SheetPrimitive.Content
         aria-describedby={undefined}
         className={cn(
-          "fixed inset-y-0 z-50 flex w-[85vw] max-w-sm flex-col bg-ivory-light shadow-xl",
+          "fixed inset-y-0 z-50 flex w-[88vw] max-w-sm flex-col bg-white shadow-card",
           side === "left"
             ? "left-0 data-[state=closed]:animate-[slide-out-left_200ms] data-[state=open]:animate-[slide-in-left_250ms]"
             : "right-0 data-[state=closed]:animate-[slide-out-right_200ms] data-[state=open]:animate-[slide-in-right_250ms]",
@@ -38,11 +38,11 @@ export function SheetContent({
         {...props}
       >
         <div className="flex items-center justify-between border-b border-line px-5 py-4">
-          <SheetPrimitive.Title className={cn("font-serif text-2xl font-medium text-navy", hideTitle && "sr-only")}>
+          <SheetPrimitive.Title className={cn("text-lg font-bold", hideTitle && "sr-only")}>
             {title}
           </SheetPrimitive.Title>
           <SheetPrimitive.Close
-            className="-mr-2 ml-auto inline-flex size-10 items-center justify-center text-navy hover:text-gold-dark"
+            className="-mr-2 ml-auto inline-flex size-10 items-center justify-center rounded-md text-black hover:bg-blue-tint"
             aria-label="Close"
           >
             <X className="size-5" aria-hidden />

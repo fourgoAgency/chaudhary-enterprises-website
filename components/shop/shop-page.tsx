@@ -4,6 +4,7 @@ import { LayoutGrid, List, X } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductCard } from "@/components/product/product-card";
 import { ProductListItem } from "@/components/product/product-list-item";
+import { Button } from "@/components/ui/button";
 import { MobileFilters } from "@/components/shop/mobile-filters";
 import { Pagination } from "@/components/shop/pagination";
 import { ShopFilters } from "@/components/shop/shop-filters";
@@ -31,23 +32,27 @@ type ShopPageProps = {
 /** Shared layout for /shop and /shop/[category]. The heading is static; results stream in. */
 export function ShopPage({ category, searchParams }: ShopPageProps) {
   return (
-    <div className="container-site py-8 sm:py-10">
-      <Breadcrumbs
-        items={category ? [{ label: "Shop", href: routes.shop }, { label: category.name }] : [{ label: "Shop" }]}
-      />
-      <header className="mt-6 max-w-2xl border-b border-line pb-8">
-        <h1 className="font-serif text-4xl font-medium text-navy sm:text-5xl">
-          {category ? category.name : "All products"}
-        </h1>
-        <p className="mt-3 text-muted">
-          {category ? category.description : "Genuine, brand-new products shipped across the United States."}
-        </p>
+    <>
+      <header className="border-b border-line bg-blue-tint">
+        <div className="container-site py-8 sm:py-10">
+          <Breadcrumbs
+            items={category ? [{ label: "Shop", href: routes.shop }, { label: category.name }] : [{ label: "Shop" }]}
+          />
+          <h1 className="mt-4 text-3xl sm:text-4xl">{category ? category.name : "All products"}</h1>
+          <p className="mt-2 max-w-xl text-muted">
+            {category
+              ? category.description
+              : "Genuine products from trusted brands, shipped across the United States."}
+          </p>
+        </div>
       </header>
 
-      <Suspense fallback={<ResultsSkeleton />}>
-        <ShopResults category={category} searchParams={searchParams} />
-      </Suspense>
-    </div>
+      <div className="container-site pb-16">
+        <Suspense fallback={<ResultsSkeleton />}>
+          <ShopResults category={category} searchParams={searchParams} />
+        </Suspense>
+      </div>
+    </>
   );
 }
 
@@ -75,7 +80,7 @@ async function ShopResults({ category, searchParams }: ShopPageProps) {
   const end = start + result.items.length - 1;
 
   return (
-    <div className="grid gap-10 pt-8 lg:grid-cols-[15rem_1fr] lg:gap-12">
+    <div className="grid gap-10 pt-8 lg:grid-cols-[16rem_1fr] lg:gap-10">
       <aside className="hidden lg:block" aria-label="Filters">
         <ShopFilters key={formKey} {...filterProps} idPrefix="filter" />
       </aside>
@@ -92,7 +97,7 @@ async function ShopResults({ category, searchParams }: ShopPageProps) {
             {state.q && (
               <>
                 {" "}
-                for <span className="font-semibold text-ink">“{state.q}”</span>
+                for <span className="font-semibold text-black">“{state.q}”</span>
               </>
             )}
           </p>
@@ -103,24 +108,21 @@ async function ShopResults({ category, searchParams }: ShopPageProps) {
         <ActiveFilters basePath={basePath} state={state} />
 
         {result.total === 0 ? (
-          <div className="mt-10 border border-dashed border-line px-6 py-16 text-center">
-            <p className="font-serif text-2xl text-navy">No products match your search</p>
-            <p className="mt-2 text-sm text-muted">Try removing a filter or searching for a different term.</p>
-            <Link
-              href={routes.shop}
-              className="mt-6 inline-block text-sm font-semibold text-navy underline decoration-gold underline-offset-4"
-            >
-              View all products
-            </Link>
+          <div className="mt-8 rounded-lg border border-dashed border-black/25 px-6 py-16 text-center">
+            <p className="text-xl font-bold">No products match your search</p>
+            <p className="mt-2 text-muted">Try removing a filter or searching for a different term.</p>
+            <Button asChild className="mt-6">
+              <Link href={routes.shop}>View all products</Link>
+            </Button>
           </div>
         ) : state.view === "list" ? (
-          <div className="mt-4 border-t border-line">
+          <div className="mt-6 space-y-3">
             {result.items.map((p) => (
               <ProductListItem key={p.id} product={p} />
             ))}
           </div>
         ) : (
-          <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 xl:grid-cols-3">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
             {result.items.map((p, i) => (
               <ProductCard key={p.id} product={p} priority={i < 3} />
             ))}
@@ -143,7 +145,7 @@ function ViewToggle({ basePath, state }: { basePath: string; state: ShopState })
     { view: "list" as const, label: "List view", Icon: List },
   ];
   return (
-    <div className="flex border border-line bg-white" role="group" aria-label="Layout">
+    <div className="flex overflow-hidden rounded-md border border-black/25" role="group" aria-label="Layout">
       {options.map(({ view, label, Icon }) => (
         <Link
           key={view}
@@ -153,7 +155,7 @@ function ViewToggle({ basePath, state }: { basePath: string; state: ShopState })
           aria-current={state.view === view ? "true" : undefined}
           className={cn(
             "inline-flex size-10 items-center justify-center",
-            state.view === view ? "bg-navy text-ivory-light" : "text-muted hover:text-navy",
+            state.view === view ? "bg-black text-white" : "bg-white text-black hover:bg-blue-tint",
           )}
         >
           <Icon className="size-4" aria-hidden />
@@ -189,10 +191,10 @@ function ActiveFilters({ basePath, state }: { basePath: string; state: ShopState
           <Link
             href={shopHref(basePath, chip.remove)}
             scroll={false}
-            className="inline-flex items-center gap-1.5 border border-line bg-white py-1 pr-2 pl-3 text-xs text-ink hover:border-navy"
+            className="inline-flex h-8 items-center gap-1.5 rounded-md bg-blue-tint pr-2 pl-3 text-sm font-medium hover:bg-blue-soft"
           >
             {chip.label}
-            <X className="size-3.5 text-muted" aria-label="Remove" />
+            <X className="size-4" aria-label="Remove" />
           </Link>
         </li>
       ))}
@@ -202,18 +204,14 @@ function ActiveFilters({ basePath, state }: { basePath: string; state: ShopState
 
 function ResultsSkeleton() {
   return (
-    <div className="grid gap-10 pt-8 lg:grid-cols-[15rem_1fr] lg:gap-12" aria-busy="true" aria-label="Loading products">
-      <div className="hidden space-y-3 lg:block">
+    <div className="grid gap-10 pt-8 lg:grid-cols-[16rem_1fr] lg:gap-10" aria-busy="true" aria-label="Loading products">
+      <div className="hidden h-96 animate-pulse rounded-lg bg-blue-tint lg:block" />
+      <div className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
         {Array.from({ length: 6 }, (_, i) => (
-          <div key={i} className="h-5 animate-pulse bg-ivory" />
-        ))}
-      </div>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 xl:grid-cols-3">
-        {Array.from({ length: 6 }, (_, i) => (
-          <div key={i}>
-            <div className="aspect-square animate-pulse bg-ivory" />
-            <div className="mt-4 h-4 w-3/4 animate-pulse bg-ivory" />
-            <div className="mt-2 h-4 w-1/2 animate-pulse bg-ivory" />
+          <div key={i} className="rounded-lg border border-line p-3">
+            <div className="aspect-square animate-pulse rounded-md bg-blue-tint" />
+            <div className="mt-4 h-4 w-3/4 animate-pulse rounded-full bg-blue-tint" />
+            <div className="mt-2 h-4 w-1/2 animate-pulse rounded-full bg-blue-tint" />
           </div>
         ))}
       </div>

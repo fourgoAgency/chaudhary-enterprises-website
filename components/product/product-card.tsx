@@ -1,53 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AddToCartButton } from "@/components/product/add-to-cart-button";
-import { StockBadge } from "@/components/product/stock-badge";
+import { ProductBadge } from "@/components/product/product-badge";
+import { WishlistButton } from "@/components/product/wishlist-button";
 import { formatPrice } from "@/lib/pricing";
 import type { Product } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
-// TODO(phase 6): wishlist heart toggle on the image.
+/** White card; the product image sits on a light-blue tint. */
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const image = product.images[0];
 
   return (
-    <article className="group relative flex flex-col">
-      <div className="relative aspect-square overflow-hidden border border-line bg-white transition-colors group-hover:border-navy/40">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-          priority={priority}
-          className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-        {product.stock !== "in_stock" && (
-          <StockBadge status={product.stock} className="absolute top-3 left-3 bg-ivory-light/95 px-2 py-1" />
-        )}
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white transition-shadow duration-200 hover:shadow-card">
+      <div className="relative aspect-square bg-blue-tint">
+        <div className="absolute inset-4 overflow-hidden rounded-md bg-white">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width: 1280px) 20vw, (min-width: 640px) 30vw, 45vw"
+            priority={priority}
+            className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+          />
+        </div>
+        <ProductBadge product={product} className="absolute top-2.5 left-2.5" />
+        <WishlistButton slug={product.slug} name={product.name} className="absolute top-2 right-2" />
       </div>
 
-      <div className="flex flex-1 flex-col pt-4">
-        <p className="text-xs text-muted">{product.brand}</p>
-        <h3 className="mt-1 line-clamp-2 font-sans text-[15px] leading-snug font-medium text-ink">
-          <Link
-            href={`/product/${product.slug}`}
-            className="group-hover:underline group-hover:decoration-gold group-hover:underline-offset-4 after:absolute after:inset-0"
-          >
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        <p className="text-xs font-medium text-muted sm:text-sm">{product.brand}</p>
+        <h3 className="mt-1 line-clamp-2 text-sm leading-snug font-semibold tracking-normal sm:text-[15px]">
+          <Link href={`/product/${product.slug}`} className="after:absolute after:inset-0 hover:text-blue">
             {product.name}
           </Link>
         </h3>
-        <p className="mt-auto pt-3 text-lg font-semibold text-navy tabular-nums">{formatPrice(product.price)}</p>
+        <p className="mt-auto pt-3 text-lg font-bold text-blue tabular-nums">{formatPrice(product.price)}</p>
         <AddToCartButton
-          product={{
-            slug: product.slug,
-            sku: product.sku,
-            name: product.name,
-            image: image.src,
-            price: product.price,
-          }}
+          slug={product.slug}
+          name={product.name}
+          size="sm"
           disabled={product.stock === "out_of_stock"}
           className="mt-3 w-full"
         />
       </div>
     </article>
   );
+}
+
+export function ProductGrid({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={cn("grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4", className)}>{children}</div>;
 }

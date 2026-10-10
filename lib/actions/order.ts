@@ -15,7 +15,7 @@ export type PlaceOrderResult =
 const GENERIC_ERROR = `Sorry, we couldn't send your order. Please try again, or email us at ${site.contact.email}.`;
 
 function orderNumber(now: Date) {
-  const ymd = now.toISOString().slice(2, 10).replace(/-/g, "");
+  const ymd = now.toISOString().slice(0, 10).replace(/-/g, "");
   return `CE-${ymd}-${String(randomInt(0, 10_000)).padStart(4, "0")}`;
 }
 
@@ -45,7 +45,16 @@ export async function placeOrder(rawDetails: unknown, rawItems: unknown): Promis
   if (details.website) {
     return {
       ok: true,
-      order: { ...base, lines: [], totals: { subtotal: 0, items: 0 }, name: "", email: "", shipTo: "" },
+      order: {
+        ...base,
+        lines: [],
+        totals: { subtotal: 0, items: 0 },
+        name: "",
+        email: "",
+        phone: "",
+        shipTo: "",
+        notes: "",
+      },
     };
   }
 
@@ -81,7 +90,9 @@ export async function placeOrder(rawDetails: unknown, rawItems: unknown): Promis
     totals: priceCart(lines),
     name: details.name,
     email: details.email,
+    phone: details.phone,
     shipTo: formatAddress(details.address),
+    notes: details.notes,
   };
   const emails = buildOrderEmails(order, details, mailConfig.ordersTo);
 

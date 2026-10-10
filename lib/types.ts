@@ -1,21 +1,7 @@
 // Catalog domain types. All money values are integer US cents.
 
-export type CategorySlug =
-  | "health-household"
-  | "beauty-personal-care"
-  | "grocery-gourmet-food"
-  | "kitchen-dining"
-  | "home-kitchen"
-  | "tools-home-improvement"
-  | "automotive"
-  | "industrial-scientific"
-  | "sports-outdoors"
-  | "electronics"
-  | "musical-instruments"
-  | "arts-crafts-sewing"
-  | "office-products"
-  | "toys-games"
-  | "baby";
+/** A category slug from data/products.json "categories". */
+export type CategorySlug = string;
 
 export type Category = {
   slug: CategorySlug;

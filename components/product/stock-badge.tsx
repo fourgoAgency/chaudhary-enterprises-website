@@ -8,15 +8,21 @@ const labels: Record<StockStatus, string> = {
 };
 
 const dots: Record<StockStatus, string> = {
-  in_stock: "bg-emerald-700",
-  low_stock: "bg-amber-600",
+  in_stock: "bg-blue",
+  low_stock: "bg-black",
   out_of_stock: "bg-muted",
 };
 
 export function StockBadge({ status, className }: { status: StockStatus; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1.5 text-xs font-medium text-ink", className)}>
-      <span className={cn("size-1.5 rounded-full", dots[status])} aria-hidden />
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 text-sm font-medium",
+        status === "out_of_stock" ? "text-muted" : "text-black",
+        className,
+      )}
+    >
+      <span className={cn("size-2 rounded-full", dots[status])} aria-hidden />
       {labels[status]}
     </span>
   );

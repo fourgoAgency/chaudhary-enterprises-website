@@ -13,7 +13,7 @@ function pageList(current: number, total: number): (number | "gap")[] {
   return pages;
 }
 
-const cell = "inline-flex size-10 items-center justify-center border text-sm tabular-nums";
+const cell = "inline-flex size-10 items-center justify-center rounded-md border text-sm font-semibold tabular-nums";
 
 export function Pagination({ basePath, state, pageCount }: { basePath: string; state: ShopState; pageCount: number }) {
   if (pageCount <= 1) return null;
@@ -28,12 +28,12 @@ export function Pagination({ basePath, state, pageCount }: { basePath: string; s
             <Link
               href={href(page - 1)}
               aria-label="Previous page"
-              className={cn(cell, "border-line hover:border-navy")}
+              className={cn(cell, "border-line hover:border-black/40")}
             >
               <ChevronLeft className="size-4" aria-hidden />
             </Link>
           ) : (
-            <span className={cn(cell, "border-line text-muted/50")} aria-hidden>
+            <span className={cn(cell, "border-line text-muted")} aria-hidden>
               <ChevronLeft className="size-4" />
             </span>
           )}
@@ -51,7 +51,7 @@ export function Pagination({ basePath, state, pageCount }: { basePath: string; s
                 aria-label={`Page ${p}`}
                 className={cn(
                   cell,
-                  p === page ? "border-navy bg-navy text-ivory-light" : "border-line text-ink hover:border-navy",
+                  p === page ? "border-blue bg-blue text-white" : "border-line hover:border-black/40",
                 )}
               >
                 {p}
@@ -61,11 +61,15 @@ export function Pagination({ basePath, state, pageCount }: { basePath: string; s
         )}
         <li>
           {page < pageCount ? (
-            <Link href={href(page + 1)} aria-label="Next page" className={cn(cell, "border-line hover:border-navy")}>
+            <Link
+              href={href(page + 1)}
+              aria-label="Next page"
+              className={cn(cell, "border-line hover:border-black/40")}
+            >
               <ChevronRight className="size-4" aria-hidden />
             </Link>
           ) : (
-            <span className={cn(cell, "border-line text-muted/50")} aria-hidden>
+            <span className={cn(cell, "border-line text-muted")} aria-hidden>
               <ChevronRight className="size-4" />
             </span>
           )}

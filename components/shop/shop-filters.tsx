@@ -24,14 +24,14 @@ type ShopFiltersProps = {
 function FilterGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <fieldset className="border-b border-line py-5 first:pt-0">
-      <legend className="float-left mb-3 w-full text-sm font-semibold text-navy">{title}</legend>
+      <legend className="float-left mb-3 w-full font-bold">{title}</legend>
       <div className="clear-left">{children}</div>
     </fieldset>
   );
 }
 
 const inputClass =
-  "h-10 w-full min-w-0 border border-line bg-white px-3 text-sm text-ink placeholder:text-muted/80 focus:border-navy focus:outline-none";
+  "h-10 w-full min-w-0 rounded-md border border-black/25 bg-white px-3 text-sm text-black placeholder:text-muted focus:border-blue focus:outline-none";
 
 function optionalNumber(value: FormDataEntryValue | null) {
   const text = String(value ?? "").trim();
@@ -86,12 +86,15 @@ export function ShopFilters({
       {state.view === "list" && <input type="hidden" name="view" value="list" />}
 
       <FilterGroup title="Category">
-        <ul className="space-y-1 text-sm">
+        <ul className="-mx-3 space-y-0.5 text-[15px]">
           <li>
             <Link
               href={shopHref(routes.shop, { q: state.q, sort: state.sort, view: state.view })}
               aria-current={!activeCategory ? "page" : undefined}
-              className={cn("block py-1 hover:text-navy", !activeCategory ? "font-semibold text-navy" : "text-muted")}
+              className={cn(
+                "block rounded-md px-3 py-1.5",
+                !activeCategory ? "bg-blue-tint font-semibold text-blue" : "hover:bg-blue-tint",
+              )}
             >
               All products
             </Link>
@@ -104,12 +107,12 @@ export function ShopFilters({
                   href={shopHref(`${routes.shop}/${c.slug}`, { q: state.q, sort: state.sort, view: state.view })}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex justify-between gap-2 py-1 hover:text-navy",
-                    active ? "font-semibold text-navy" : "text-muted",
+                    "flex justify-between gap-2 rounded-md px-3 py-1.5",
+                    active ? "bg-blue-tint font-semibold text-blue" : "hover:bg-blue-tint",
                   )}
                 >
                   {c.name}
-                  <span className="text-xs tabular-nums">{c.count}</span>
+                  <span className="text-sm text-muted tabular-nums">{c.count}</span>
                 </Link>
               </li>
             );
@@ -119,7 +122,7 @@ export function ShopFilters({
 
       {facets.brands.length > 0 && (
         <FilterGroup title="Brand">
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2 text-[15px]">
             {facets.brands.map((b) => (
               <li key={b.name}>
                 <label className="flex cursor-pointer items-center gap-2.5">
@@ -128,10 +131,10 @@ export function ShopFilters({
                     name="brand"
                     value={b.name}
                     defaultChecked={state.brands.includes(b.name)}
-                    className="size-4 accent-navy"
+                    className="size-[1.1rem] accent-blue"
                   />
                   <span className="flex-1">{b.name}</span>
-                  <span className="text-xs text-muted tabular-nums">{b.count}</span>
+                  <span className="text-sm text-muted tabular-nums">{b.count}</span>
                 </label>
               </li>
             ))}
@@ -140,8 +143,14 @@ export function ShopFilters({
       )}
 
       <FilterGroup title="Availability">
-        <label className="flex cursor-pointer items-center gap-2.5 text-sm">
-          <input type="checkbox" name="stock" value="1" defaultChecked={state.inStock} className="size-4 accent-navy" />
+        <label className="flex cursor-pointer items-center gap-2.5 text-[15px]">
+          <input
+            type="checkbox"
+            name="stock"
+            value="1"
+            defaultChecked={state.inStock}
+            className="size-[1.1rem] accent-blue"
+          />
           In stock only
         </label>
       </FilterGroup>
@@ -190,7 +199,7 @@ export function ShopFilters({
           <Link
             href={shopHref(basePath, { q: state.q, sort: state.sort, view: state.view })}
             onClick={onApplied}
-            className="text-sm text-muted underline underline-offset-4 hover:text-navy"
+            className="text-sm font-semibold text-blue underline underline-offset-4"
           >
             Clear all
           </Link>

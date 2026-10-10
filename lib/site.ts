@@ -2,9 +2,11 @@
 export const site = {
   name: "Chaudhary Enterprises LLC",
   shortName: "Chaudhary Enterprises",
-  tagline: "Genuine products, delivered across the US",
+  tagline: "Quality Brands, Delivered to Your Door",
   description:
-    "Shop genuine, brand-new products from Chaudhary Enterprises LLC of Sheridan, Wyoming, with delivery across the United States.",
+    "Shop genuine products from trusted brands at Chaudhary Enterprises LLC — wellness, beauty, electronics, sports gear and more, shipped across the United States.",
+  /** Slim bar above the header. */
+  topBarMessage: "Fast US shipping • Genuine brands",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://chaudharyenterprisesllc.com",
   // ISO 4217 code used for all prices
   currency: "USD",
@@ -43,14 +45,16 @@ export const routes = {
 } as const;
 
 export const mainNav = [
-  { label: "Shop all", href: routes.shop },
-  { label: "About", href: routes.about },
+  { label: "Home", href: routes.home },
+  { label: "Shop", href: routes.shop },
 ] as const;
 
-export const accountNav = [
-  { label: "My account", href: routes.account },
+/** Footer quick links. */
+export const quickLinks = [
+  { label: "Shop", href: routes.shop },
   { label: "Wishlist", href: routes.wishlist },
-  { label: "Cart", href: routes.cart },
+  { label: "My Account", href: routes.account },
+  { label: "About us", href: routes.about },
 ] as const;
 
 // Policy pages; content lives in content/policies/<slug>.md.

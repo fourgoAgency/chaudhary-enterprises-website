@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 // Pricing helpers shared by the UI and the server-side order handler. All amounts are integer cents.
 
 /** Upper bound on a single cart line. */
-export const MAX_LINE_QUANTITY = 999;
+export const MAX_LINE_QUANTITY = 10;
 
 const currencyFormatter = new Intl.NumberFormat(site.locale, {
   style: "currency",

@@ -1,7 +1,6 @@
-import { categories } from "@/data/categories";
-import { categoryOverrides, products } from "@/data/products";
+import { categories, products } from "@/data/products";
 import type { SortKey } from "@/lib/shop-params";
-import type { Category, CategorySlug, Product } from "@/lib/types";
+import type { Category, CategorySlug, Product, StockStatus } from "@/lib/types";
 
 // Catalog data layer. Everything outside this file reads products through these async functions,
 // so data/products.json can later be swapped for a CMS without touching pages or components.
@@ -38,9 +37,7 @@ export type CatalogFacets = {
 // ---- Categories ----
 
 // Only categories that currently have products are shown; others appear once products are added.
-const activeCategories = categories
-  .filter((c) => products.some((p) => p.category === c.slug))
-  .map((c) => ({ ...c, ...categoryOverrides.get(c.slug) }));
+const activeCategories = categories.filter((c) => products.some((p) => p.category === c.slug));
 
 export async function getCategories(): Promise<Category[]> {
   return activeCategories;
@@ -69,6 +66,50 @@ export async function getFeaturedProducts(limit = 8): Promise<Product[]> {
   return products.filter((p) => p.featured).slice(0, limit);
 }
 
+/** The most recently added products (later entries in products.json count as newer). */
+export async function getNewArrivals(limit = 4): Promise<Product[]> {
+  return [...products].sort(byNewest).slice(0, limit);
+}
+
+/** Slugs of the newest products, for "New" badges. */
+export const newProductSlugs: ReadonlySet<string> = new Set(
+  [...products]
+    .sort((a, b) => b.position - a.position)
+    .slice(0, 6)
+    .map((p) => p.slug),
+);
+
+/** What browser-side features (cart, checkout, wishlist) need to know about a product. */
+export type StorefrontItem = {
+  slug: string;
+  sku: string;
+  name: string;
+  brand: string;
+  image: string;
+  /** Unit price in cents. */
+  price: number;
+  stock: StockStatus;
+};
+
+export type StorefrontCatalog = Record<string, StorefrontItem>;
+
+/** Every product, keyed by slug. Small enough to hand to client components as a prop. */
+export async function getStorefrontCatalog(): Promise<StorefrontCatalog> {
+  return Object.fromEntries(products.map((p) => [p.slug, toStorefrontItem(p)]));
+}
+
+export function toStorefrontItem(p: Product): StorefrontItem {
+  return {
+    slug: p.slug,
+    sku: p.sku,
+    name: p.name,
+    brand: p.brand,
+    image: p.images[0].src,
+    price: p.price,
+    stock: p.stock,
+  };
+}
+
 /** Same-category products first, topped up with featured items from other categories. */
 export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
   const sameCategory = products.filter((p) => p.category === product.category && p.id !== product.id);
@@ -77,7 +118,7 @@ export async function getRelatedProducts(product: Product, limit = 4): Promise<P
 }
 
 export async function getProductCountsByCategory(): Promise<Record<CategorySlug, number>> {
-  const counts = Object.fromEntries(categories.map((c) => [c.slug, 0])) as Record<CategorySlug, number>;
+  const counts: Record<CategorySlug, number> = Object.fromEntries(categories.map((c) => [c.slug, 0]));
   for (const p of products) counts[p.category]++;
   return counts;
 }

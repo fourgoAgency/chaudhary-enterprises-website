@@ -6,7 +6,7 @@ import type { ProductImage } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 /** Main image with hover zoom (pointer devices) and a thumbnail strip when there is more than one image. */
-export function ProductGallery({ images }: { images: ProductImage[] }) {
+export function ProductGallery({ images, badge }: { images: ProductImage[]; badge?: React.ReactNode }) {
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
   const image = images[index];
@@ -19,20 +19,23 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
 
   return (
     <div className="flex flex-col gap-3 lg:flex-row-reverse">
-      <div
-        className="relative aspect-square flex-1 cursor-zoom-in overflow-hidden border border-line bg-ivory"
-        onPointerMove={onPointerMove}
-        onPointerLeave={() => setZoom(null)}
-      >
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          priority
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover transition-transform duration-200 ease-out"
-          style={zoom ? { transform: "scale(1.8)", transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
-        />
+      <div className="relative flex-1 rounded-lg border border-line bg-blue-tint p-4 sm:p-6">
+        <div
+          className="relative aspect-square cursor-zoom-in overflow-hidden rounded-md bg-white"
+          onPointerMove={onPointerMove}
+          onPointerLeave={() => setZoom(null)}
+        >
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            priority
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="object-contain transition-transform duration-200 ease-out"
+            style={zoom ? { transform: "scale(1.9)", transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
+          />
+        </div>
+        {badge && <div className="absolute top-3 left-3">{badge}</div>}
       </div>
 
       {images.length > 1 && (
@@ -45,11 +48,11 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
                 aria-label={`Show image ${i + 1} of ${images.length}`}
                 aria-current={i === index ? "true" : undefined}
                 className={cn(
-                  "relative block aspect-square w-full overflow-hidden border bg-ivory",
-                  i === index ? "border-navy" : "border-line hover:border-navy/50",
+                  "relative block aspect-square w-full overflow-hidden rounded-md border bg-white",
+                  i === index ? "border-blue ring-1 ring-blue" : "border-line hover:border-black/40",
                 )}
               >
-                <Image src={img.src} alt="" fill sizes="5rem" className="object-cover" />
+                <Image src={img.src} alt="" fill sizes="5rem" className="object-contain p-1" />
               </button>
             </li>
           ))}

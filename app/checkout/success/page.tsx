@@ -15,7 +15,7 @@ async function Confirmation({ searchParams }: { searchParams: PageProps<"/checko
 export default function CheckoutSuccessPage({ searchParams }: PageProps<"/checkout/success">) {
   return (
     <div className="container-site py-12 sm:py-16">
-      <Suspense fallback={<div className="mx-auto h-80 max-w-2xl animate-pulse bg-ivory" />}>
+      <Suspense fallback={<div className="mx-auto h-80 max-w-2xl animate-pulse rounded-lg bg-blue-tint" />}>
         <Confirmation searchParams={searchParams} />
       </Suspense>
     </div>

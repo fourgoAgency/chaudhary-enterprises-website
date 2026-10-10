@@ -11,7 +11,6 @@ type HeaderIconLinkProps = {
   className?: string;
 };
 
-// TODO(phase 6): live wishlist count.
 export function HeaderIconLink({ href, label, icon: Icon, count, className }: HeaderIconLinkProps) {
   const hasCount = count !== undefined;
   const accessibleLabel = hasCount ? `${label}, ${count} ${count === 1 ? "item" : "items"}` : label;
@@ -22,13 +21,17 @@ export function HeaderIconLink({ href, label, icon: Icon, count, className }: He
       aria-label={accessibleLabel}
       title={label}
       className={cn(
-        "relative inline-flex size-10 items-center justify-center text-navy transition-colors hover:text-gold-dark",
+        "relative inline-flex size-10 items-center justify-center rounded-md text-black transition-colors hover:bg-blue-tint hover:text-blue",
         className,
       )}
     >
-      <Icon className="size-5" aria-hidden strokeWidth={1.5} />
+      <Icon className="size-[1.35rem]" aria-hidden strokeWidth={1.75} />
       {hasCount && count > 0 && (
-        <span className="absolute top-0.5 right-0 flex min-w-4.5 items-center justify-center rounded-full bg-navy px-1 text-[10px] leading-4.5 font-semibold text-ivory-light">
+        // Keyed by count so the badge pops whenever the number changes.
+        <span
+          key={count}
+          className="absolute top-0.5 right-0 flex h-[1.15rem] min-w-[1.15rem] animate-pop items-center justify-center rounded-full bg-blue px-1 text-[11px] leading-none font-bold text-white"
+        >
           {count > 99 ? "99+" : count}
         </span>
       )}

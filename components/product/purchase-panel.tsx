@@ -2,66 +2,81 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Check, Zap } from "lucide-react";
+import { AddToCartButton } from "@/components/product/add-to-cart-button";
 import { QuantityStepper } from "@/components/product/quantity-stepper";
+import { WishlistButton } from "@/components/product/wishlist-button";
 import { Button } from "@/components/ui/button";
-import { useCart, type CartProduct } from "@/lib/cart-store";
-import { formatPrice } from "@/lib/pricing";
+import { useCart } from "@/lib/cart-store";
+import { formatPrice, MAX_LINE_QUANTITY } from "@/lib/pricing";
 import { routes } from "@/lib/site";
 import type { StockStatus } from "@/lib/types";
 
-export function PurchasePanel({ product }: { product: CartProduct & { stock: StockStatus } }) {
+type PurchasePanelProps = {
+  product: { slug: string; name: string; price: number; stock: StockStatus };
+};
+
+export function PurchasePanel({ product }: PurchasePanelProps) {
+  const router = useRouter();
   const add = useCart((s) => s.add);
   const [quantity, setQuantity] = useState(1);
-  const [added, setAdded] = useState<number | null>(null);
+  const [justAdded, setJustAdded] = useState(false);
   const outOfStock = product.stock === "out_of_stock";
 
   return (
     <div>
-      <p className="text-3xl font-semibold text-navy tabular-nums">{formatPrice(product.price)}</p>
+      <p className="text-3xl font-bold text-blue tabular-nums">{formatPrice(product.price)}</p>
 
-      <div className="mt-6 flex flex-wrap items-end gap-3">
-        <div>
-          <label htmlFor="quantity" className="mb-1.5 block text-sm font-medium text-ink">
-            Quantity
-          </label>
-          <QuantityStepper
-            id="quantity"
-            value={quantity}
-            onChange={(q) => {
-              setQuantity(q);
-              setAdded(null);
-            }}
-            disabled={outOfStock}
-          />
+      <div className="mt-6">
+        <label htmlFor="quantity" className="mb-2 block text-sm font-semibold">
+          Quantity <span className="font-normal text-muted">(max {MAX_LINE_QUANTITY})</span>
+        </label>
+        <div className="flex flex-wrap items-center gap-3">
+          <QuantityStepper id="quantity" value={quantity} onChange={setQuantity} disabled={outOfStock} />
+          {quantity > 1 && (
+            <p className="text-sm text-muted">
+              Total{" "}
+              <span className="font-semibold text-black tabular-nums">{formatPrice(product.price * quantity)}</span>
+            </p>
+          )}
         </div>
-        <Button
-          size="lg"
-          className="min-w-48 flex-1"
-          disabled={outOfStock}
-          onClick={() => {
-            add(product, quantity);
-            setAdded(quantity);
-          }}
-        >
-          {outOfStock ? "Out of stock" : "Add to cart"}
-        </Button>
       </div>
 
-      {quantity > 1 && (
-        <p className="mt-3 text-sm text-muted">
-          Total for {quantity}: <span className="font-semibold text-ink">{formatPrice(product.price * quantity)}</span>
-        </p>
-      )}
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        <AddToCartButton
+          slug={product.slug}
+          name={product.name}
+          quantity={quantity}
+          size="lg"
+          disabled={outOfStock}
+          className="w-full"
+          onAdded={() => setJustAdded(true)}
+        />
+        <Button
+          size="lg"
+          variant="secondary"
+          disabled={outOfStock}
+          className="w-full"
+          onClick={() => {
+            add(product.slug, quantity);
+            router.push(routes.checkout);
+          }}
+        >
+          <Zap aria-hidden />
+          Buy Now
+        </Button>
+      </div>
+      <WishlistButton slug={product.slug} name={product.name} variant="full" className="mt-3 w-full" />
 
-      {added !== null && (
+      {justAdded && (
         <p
           role="status"
-          className="mt-4 flex items-center gap-2 border border-emerald-800/20 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"
+          className="mt-4 flex items-center gap-2 rounded-md border border-blue bg-blue-tint px-4 py-3 text-sm font-medium"
         >
-          <Check className="size-4 shrink-0" aria-hidden />
-          Added {added} to your cart.
-          <Link href={routes.cart} className="ml-auto font-semibold underline underline-offset-4">
+          <Check className="size-4 shrink-0 text-blue" aria-hidden strokeWidth={2.5} />
+          Added to your cart.
+          <Link href={routes.cart} className="ml-auto font-semibold text-blue underline underline-offset-4">
             View cart
           </Link>
         </p>

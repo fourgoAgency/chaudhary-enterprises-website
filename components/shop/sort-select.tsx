@@ -19,7 +19,7 @@ export function SortSelect({ basePath, state }: { basePath: string; state: ShopS
           onChange={(e) =>
             router.push(shopHref(basePath, { ...state, sort: e.target.value as SortKey, page: 1 }), { scroll: false })
           }
-          className="h-10 appearance-none border border-line bg-white pr-9 pl-3 text-sm text-ink focus:border-navy focus:outline-none"
+          className="h-10 appearance-none rounded-md border border-black/25 bg-white pr-9 pl-3 text-sm font-medium text-black focus:border-blue focus:shadow-[0_0_0_3px_var(--color-blue-soft)] focus:outline-none"
         >
           {SORT_OPTIONS.map((o) => (
             <option key={o.value} value={o.value}>

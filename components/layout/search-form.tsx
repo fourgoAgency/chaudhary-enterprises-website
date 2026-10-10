@@ -13,13 +13,13 @@ export function SearchForm({ className, id = "site-search" }: { className?: stri
         id={id}
         name="q"
         type="search"
-        placeholder="Search products"
-        className="h-10 w-full border border-line bg-white pr-10 pl-3 text-sm text-ink placeholder:text-muted focus:border-gold focus:outline-none"
+        placeholder="Search products…"
+        className="h-10 w-full rounded-md border border-black/20 bg-white pr-11 pl-3.5 text-sm text-black placeholder:text-muted focus:border-blue focus:shadow-[0_0_0_3px_var(--color-blue-soft)] focus:outline-none"
       />
       <button
         type="submit"
         aria-label="Search"
-        className="absolute inset-y-0 right-0 inline-flex w-10 items-center justify-center text-navy hover:text-gold-dark"
+        className="absolute inset-y-1 right-1 inline-flex w-8 items-center justify-center rounded bg-blue text-white transition-colors hover:bg-blue-hover"
       >
         <Search className="size-4" aria-hidden />
       </button>

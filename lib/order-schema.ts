@@ -16,6 +16,8 @@ export const addressSchema = z.object({
     .regex(/^\d{5}(-\d{4})?$/, "Enter a 5-digit ZIP code"),
 });
 
+export type ShippingAddress = z.output<typeof addressSchema>;
+
 export const checkoutSchema = z.object({
   name: required("Enter your full name", 80),
   email: z.email("Enter a valid email address").max(200),

@@ -1,79 +1,81 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { persist } from "zustand/middleware";
+import type { StorefrontCatalog, StorefrontItem } from "@/lib/catalog";
 import { normalizeQuantity } from "@/lib/pricing";
-import type { Product } from "@/lib/types";
+import { safeJSONStorage } from "@/lib/safe-storage";
 
-// Cart saved in the browser (localStorage). Lines keep a snapshot of the price for display only;
-// order totals are always recalculated on the server from the catalog.
+// Cart saved in the browser. It stores only product slugs and quantities: names, prices and stock
+// are always read from the catalog, and the server re-prices every order.
 
-export type CartProduct = Pick<Product, "slug" | "sku" | "name" | "price"> & { image: string };
-
-export type CartLine = CartProduct & { quantity: number };
+export type CartLine = { slug: string; quantity: number };
 
 type CartState = {
   lines: CartLine[];
-  add: (product: CartProduct, quantity?: number) => void;
+  add: (slug: string, quantity?: number) => void;
   setQuantity: (slug: string, quantity: number) => void;
   remove: (slug: string) => void;
   clear: () => void;
-  /** Refresh lines from current catalog data; products no longer sold are removed. Returns removed names. */
-  sync: (live: CartProduct[]) => string[];
 };
-
-/** Copy only the fields a cart line stores (callers may pass extra props such as stock). */
-function toLine({ slug, sku, name, image, price }: CartProduct): CartProduct {
-  return { slug, sku, name, image, price };
-}
 
 export const useCart = create<CartState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       lines: [],
-      add: (product, quantity = 1) =>
+      add: (slug, quantity = 1) =>
         set((state) => {
-          const existing = state.lines.find((l) => l.slug === product.slug);
-          if (existing) {
-            return {
-              lines: state.lines.map((l) =>
-                l.slug === product.slug
-                  ? { ...toLine(product), quantity: normalizeQuantity(l.quantity + quantity) }
-                  : l,
-              ),
-            };
-          }
-          return { lines: [...state.lines, { ...toLine(product), quantity: normalizeQuantity(quantity) }] };
+          const existing = state.lines.find((l) => l.slug === slug);
+          const lines = existing
+            ? state.lines.map((l) =>
+                l.slug === slug ? { slug, quantity: normalizeQuantity(l.quantity + quantity) } : l,
+              )
+            : [...state.lines, { slug, quantity: normalizeQuantity(quantity) }];
+          return { lines };
         }),
       setQuantity: (slug, quantity) =>
         set((state) => ({
-          lines: state.lines.map((l) => (l.slug === slug ? { ...l, quantity: normalizeQuantity(quantity) } : l)),
+          lines: state.lines.map((l) => (l.slug === slug ? { slug, quantity: normalizeQuantity(quantity) } : l)),
         })),
       remove: (slug) => set((state) => ({ lines: state.lines.filter((l) => l.slug !== slug) })),
       clear: () => set({ lines: [] }),
-      sync: (live) => {
-        const bySlug = new Map(live.map((p) => [p.slug, p]));
-        const { lines } = get();
-        const removed = lines.filter((l) => !bySlug.has(l.slug)).map((l) => l.name);
-        set({
-          lines: lines.flatMap((l) => {
-            const p = bySlug.get(l.slug);
-            return p ? [{ ...toLine(p), quantity: l.quantity }] : [];
-          }),
-        });
-        return removed;
-      },
     }),
     {
       name: "ce-cart",
-      version: 2,
-      storage: createJSONStorage(() => localStorage),
-      // v1 carts held wholesale case quantities; start those fresh.
-      migrate: () => ({ lines: [] }),
+      version: 3,
+      storage: safeJSONStorage,
+      // v2 lines carried a price snapshot; keep just slug + quantity. Older carts start fresh.
+      migrate: (persisted, version) => {
+        if (version === 2 && persisted && typeof persisted === "object" && "lines" in persisted) {
+          const lines = (persisted as { lines: unknown[] }).lines.flatMap((l) => {
+            const { slug, quantity } = (l ?? {}) as Partial<CartLine>;
+            return typeof slug === "string" ? [{ slug, quantity: normalizeQuantity(Number(quantity)) }] : [];
+          });
+          return { lines };
+        }
+        return { lines: [] };
+      },
     },
   ),
 );
+
+export type PricedCartLine = StorefrontItem & { quantity: number };
+
+/** Cart lines joined with current catalog data. Products no longer sold are listed in `missing`. */
+export function usePricedCart(catalog: StorefrontCatalog) {
+  const lines = useCart((s) => s.lines);
+  return useMemo(() => {
+    const items: PricedCartLine[] = [];
+    const missing: string[] = [];
+    for (const line of lines) {
+      const product = catalog[line.slug];
+      if (product) items.push({ ...product, quantity: line.quantity });
+      else missing.push(line.slug);
+    }
+    return { items, missing };
+  }, [lines, catalog]);
+}
 
 const noopSubscribe = () => () => {};
 

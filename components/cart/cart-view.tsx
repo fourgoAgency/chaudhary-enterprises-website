@@ -1,105 +1,96 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Info, ShoppingBag, Trash2 } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Trash2 } from "lucide-react";
 import { QuantityStepper } from "@/components/product/quantity-stepper";
 import { Button } from "@/components/ui/button";
-import { getLiveCartProducts } from "@/lib/actions/cart";
-import { useCart, useHydrated, type CartLine } from "@/lib/cart-store";
+import { FieldError } from "@/components/ui/field";
+import { useCart, useHydrated, usePricedCart, type PricedCartLine } from "@/lib/cart-store";
+import type { StorefrontCatalog } from "@/lib/catalog";
 import { formatPrice, priceCart } from "@/lib/pricing";
 import { routes } from "@/lib/site";
-import type { StockStatus } from "@/lib/types";
 
-export function CartView() {
+export function CartView({ catalog }: { catalog: StorefrontCatalog }) {
   const hydrated = useHydrated();
-  const lines = useCart((s) => s.lines);
-  const [removed, setRemoved] = useState<string[]>([]);
-  const [stock, setStock] = useState<Record<string, StockStatus>>({});
-
-  // Refresh prices and stock from the catalog once the browser cart has loaded.
-  useEffect(() => {
-    if (!hydrated) return;
-    const slugs = useCart.getState().lines.map((l) => l.slug);
-    if (!slugs.length) return;
-    let cancelled = false;
-    getLiveCartProducts(slugs)
-      .then((live) => {
-        if (cancelled) return;
-        setRemoved(useCart.getState().sync(live));
-        setStock(Object.fromEntries(live.map((p) => [p.slug, p.stock])));
-      })
-      .catch(() => {
-        // Keep showing the saved cart; the server re-checks everything when the order is sent.
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [hydrated]);
+  const { items, missing } = usePricedCart(catalog);
+  const remove = useCart((s) => s.remove);
 
   if (!hydrated) return <CartSkeleton />;
 
-  if (lines.length === 0) {
+  if (items.length === 0) {
     return (
-      <div className="mt-10 border border-dashed border-line px-6 py-20 text-center">
-        <ShoppingBag className="mx-auto size-8 text-muted" strokeWidth={1.5} aria-hidden />
-        <p className="mt-4 font-serif text-2xl text-navy">Your cart is empty</p>
-        {removed.length > 0 && <RemovedNotice names={removed} />}
-        <p className="mt-2 text-sm text-muted">Browse our products and add something you like.</p>
-        <Button asChild className="mt-8">
-          <Link href={routes.shop}>Browse products</Link>
+      <div className="mt-8 rounded-lg border border-dashed border-black/25 px-6 py-16 text-center sm:py-20">
+        <ShoppingBag className="mx-auto size-10 text-blue" strokeWidth={1.5} aria-hidden />
+        <p className="mt-4 text-xl font-bold">Your cart is empty</p>
+        <p className="mt-1 text-muted">Browse the store and add something you like.</p>
+        <Button asChild className="mt-6">
+          <Link href={routes.shop}>Start shopping</Link>
         </Button>
       </div>
     );
   }
 
-  const totals = priceCart(lines);
-  const unavailable = lines.filter((l) => stock[l.slug] === "out_of_stock");
+  const totals = priceCart(items);
+  const unavailable = items.filter((l) => l.stock === "out_of_stock");
 
   return (
-    <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_22rem] lg:gap-12">
+    <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_22rem] lg:gap-10">
       <section aria-label="Cart items">
-        {removed.length > 0 && <RemovedNotice names={removed} />}
-        <ul className="border-t border-line">
-          {lines.map((line) => (
-            <CartLineRow key={line.slug} line={line} outOfStock={stock[line.slug] === "out_of_stock"} />
+        {missing.length > 0 && (
+          <div
+            role="status"
+            className="mb-4 flex flex-wrap items-center gap-3 rounded-md border border-blue bg-blue-tint px-4 py-3 text-sm"
+          >
+            <p className="flex-1">
+              {missing.length === 1 ? "A product" : `${missing.length} products`} in your cart{" "}
+              {missing.length === 1 ? "is" : "are"} no longer available and won&apos;t be ordered.
+            </p>
+            <Button size="sm" variant="outline" onClick={() => missing.forEach(remove)}>
+              OK
+            </Button>
+          </div>
+        )}
+
+        <div className="hidden grid-cols-[1fr_8rem_7rem] gap-4 border-b border-line pb-3 text-sm font-semibold text-muted sm:grid">
+          <span>Product</span>
+          <span>Quantity</span>
+          <span className="text-right">Total</span>
+        </div>
+        <ul>
+          {items.map((line) => (
+            <CartLineRow key={line.slug} line={line} />
           ))}
         </ul>
-        <Link
-          href={routes.shop}
-          className="mt-6 inline-block text-sm font-semibold text-navy underline decoration-gold underline-offset-4 hover:text-gold-dark"
-        >
-          Continue shopping
-        </Link>
+        <Button asChild variant="outline" className="mt-6">
+          <Link href={routes.shop}>
+            <ArrowLeft aria-hidden />
+            Continue shopping
+          </Link>
+        </Button>
       </section>
 
       <aside aria-label="Order summary" className="lg:sticky lg:top-28 lg:self-start">
-        <div className="border border-line bg-white p-6">
-          <h2 className="font-serif text-2xl text-navy">Order summary</h2>
-          <dl className="mt-5 text-sm">
-            <div className="flex items-baseline justify-between">
-              <dt className="text-muted">
+        <div className="rounded-lg border border-line bg-white p-6">
+          <h2 className="text-xl">Order summary</h2>
+          <dl className="mt-5 border-t border-line pt-4">
+            <div className="flex items-baseline justify-between gap-4">
+              <dt className="font-semibold">
                 Subtotal ({totals.items} {totals.items === 1 ? "item" : "items"})
               </dt>
-              <dd className="text-xl font-semibold text-navy tabular-nums">{formatPrice(totals.subtotal)}</dd>
+              <dd className="text-2xl font-bold text-blue tabular-nums">{formatPrice(totals.subtotal)}</dd>
             </div>
           </dl>
-          <p className="mt-4 flex gap-2 text-xs leading-relaxed text-muted">
-            <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            Shipping and any sales tax are confirmed by email with your order. No payment is taken online.
+          <p className="mt-4 text-sm text-muted">
+            Shipping and tax confirmed with your order. No payment is taken online.
           </p>
-          {unavailable.length > 0 && (
-            <p role="alert" className="mt-4 text-sm text-red-800">
-              Remove out-of-stock items to continue.
-            </p>
-          )}
+          {unavailable.length > 0 && <FieldError>Remove out-of-stock items to continue.</FieldError>}
           {unavailable.length > 0 ? (
-            <Button size="lg" className="mt-6 w-full" disabled>
+            <Button size="lg" className="mt-5 w-full" disabled>
               Proceed to checkout
             </Button>
           ) : (
-            <Button asChild size="lg" className="mt-6 w-full">
+            <Button asChild size="lg" className="mt-5 w-full">
               <Link href={routes.checkout}>Proceed to checkout</Link>
             </Button>
           )}
@@ -109,38 +100,32 @@ export function CartView() {
   );
 }
 
-function CartLineRow({ line, outOfStock }: { line: CartLine; outOfStock: boolean }) {
+function CartLineRow({ line }: { line: PricedCartLine }) {
   const setQuantity = useCart((s) => s.setQuantity);
   const remove = useCart((s) => s.remove);
   const href = `/product/${line.slug}`;
 
   return (
-    <li className="grid grid-cols-[5rem_1fr] gap-4 border-b border-line py-6 sm:grid-cols-[6rem_1fr_auto] sm:gap-6">
-      <Link href={href} className="relative aspect-square border border-line bg-white" tabIndex={-1} aria-hidden>
-        <Image src={line.image} alt="" fill sizes="6rem" className="object-contain p-1.5" />
-      </Link>
-
-      <div className="min-w-0">
-        <h3 className="font-sans text-[15px] leading-snug font-medium text-ink">
-          <Link href={href} className="hover:underline hover:underline-offset-4">
-            {line.name}
-          </Link>
-        </h3>
-        <p className="mt-1 text-sm text-muted tabular-nums">{formatPrice(line.price)} each</p>
-        {outOfStock && <p className="mt-1 text-sm font-medium text-red-800">Out of stock</p>}
-
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <QuantityStepper
-            id={`qty-${line.slug}`}
-            size="sm"
-            value={line.quantity}
-            onChange={(q) => setQuantity(line.slug, q)}
-            aria-label={`Quantity for ${line.name}`}
-          />
+    <li className="grid grid-cols-[5rem_1fr] gap-4 border-b border-line py-5 sm:grid-cols-[1fr_8rem_7rem] sm:items-center">
+      <div className="contents sm:flex sm:gap-4">
+        <Link href={href} className="relative size-20 shrink-0 rounded-md bg-blue-tint" tabIndex={-1} aria-hidden>
+          <span className="absolute inset-1.5 overflow-hidden rounded bg-white">
+            <Image src={line.image} alt="" fill sizes="5rem" className="object-contain" />
+          </span>
+        </Link>
+        <div className="min-w-0">
+          <p className="text-sm text-muted">{line.brand}</p>
+          <h3 className="text-[15px] leading-snug font-semibold tracking-normal">
+            <Link href={href} className="hover:text-blue">
+              {line.name}
+            </Link>
+          </h3>
+          <p className="mt-1 text-sm text-muted tabular-nums">{formatPrice(line.price)} each</p>
+          {line.stock === "out_of_stock" && <FieldError>Out of stock</FieldError>}
           <button
             type="button"
             onClick={() => remove(line.slug)}
-            className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-red-800"
+            className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted hover:text-blue"
           >
             <Trash2 className="size-4" aria-hidden />
             Remove<span className="sr-only"> {line.name}</span>
@@ -148,30 +133,29 @@ function CartLineRow({ line, outOfStock }: { line: CartLine; outOfStock: boolean
         </div>
       </div>
 
-      <p className="col-start-2 font-semibold text-navy tabular-nums sm:col-start-3 sm:text-right">
-        {formatPrice(line.price * line.quantity)}
-      </p>
+      <div className="col-start-2 flex items-center justify-between gap-4 sm:col-start-auto sm:contents">
+        <QuantityStepper
+          id={`qty-${line.slug}`}
+          size="sm"
+          value={line.quantity}
+          onChange={(q) => setQuantity(line.slug, q)}
+          aria-label={`Quantity for ${line.name}`}
+        />
+        <p className="font-bold tabular-nums sm:text-right">{formatPrice(line.price * line.quantity)}</p>
+      </div>
     </li>
-  );
-}
-
-function RemovedNotice({ names }: { names: string[] }) {
-  return (
-    <p role="status" className="mb-4 border border-amber-700/30 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-      Removed from your cart because they are no longer available: {names.join(", ")}.
-    </p>
   );
 }
 
 function CartSkeleton() {
   return (
-    <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_22rem]" aria-busy="true" aria-label="Loading cart">
+    <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_22rem]" aria-busy="true" aria-label="Loading cart">
       <div className="space-y-4">
         {[0, 1].map((i) => (
-          <div key={i} className="h-32 animate-pulse bg-ivory" />
+          <div key={i} className="h-28 animate-pulse rounded-lg bg-blue-tint" />
         ))}
       </div>
-      <div className="h-64 animate-pulse bg-ivory" />
+      <div className="h-72 animate-pulse rounded-lg bg-blue-tint" />
     </div>
   );
 }

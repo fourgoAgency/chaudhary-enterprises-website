@@ -26,18 +26,26 @@ export function QuantityStepper({ id, value, onChange, disabled, size = "md", ..
     if (normalized !== value) onChange(normalized);
   }
 
-  const button =
-    "inline-flex items-center justify-center text-navy hover:bg-ivory disabled:text-muted/40 disabled:hover:bg-transparent";
   const sm = size === "sm";
+  const button = cn(
+    "inline-flex h-full items-center justify-center text-black transition-colors hover:bg-blue-tint hover:text-blue disabled:text-muted/50 disabled:hover:bg-transparent",
+    sm ? "w-8" : "w-11",
+  );
 
   return (
-    <div className={cn("inline-flex border border-navy/30 bg-white", sm ? "h-10" : "h-12")}>
+    <div
+      className={cn(
+        "inline-flex items-stretch overflow-hidden rounded-md border border-black/25 bg-white has-[input:focus]:border-blue has-[input:focus]:shadow-[0_0_0_3px_var(--color-blue-soft)]",
+        sm ? "h-9" : "h-12",
+        disabled && "border-line",
+      )}
+    >
       <button
         type="button"
         onClick={() => commit(value - 1)}
         disabled={disabled || value <= 1}
         aria-label="Decrease quantity"
-        className={cn(button, sm ? "w-9" : "w-12")}
+        className={button}
       >
         <Minus className="size-4" aria-hidden />
       </button>
@@ -59,8 +67,8 @@ export function QuantityStepper({ id, value, onChange, disabled, size = "md", ..
         }}
         {...aria}
         className={cn(
-          "border-x border-navy/30 text-center font-semibold text-ink tabular-nums focus:outline-none [&::-webkit-inner-spin-button]:appearance-none",
-          sm ? "w-12 text-sm" : "w-16 text-base",
+          "[appearance:textfield] border-x border-line bg-transparent text-center font-semibold text-black tabular-nums focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
+          sm ? "w-10 text-sm" : "w-14 text-base",
         )}
       />
       <button
@@ -68,7 +76,7 @@ export function QuantityStepper({ id, value, onChange, disabled, size = "md", ..
         onClick={() => commit(value + 1)}
         disabled={disabled || value >= MAX_LINE_QUANTITY}
         aria-label="Increase quantity"
-        className={cn(button, sm ? "w-9" : "w-12")}
+        className={button}
       >
         <Plus className="size-4" aria-hidden />
       </button>

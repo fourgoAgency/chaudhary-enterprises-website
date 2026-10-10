@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-/** Sticky header shell that gains a shadow once the page has scrolled. */
+/** Sticky header shell that gains a soft shadow once the page has scrolled. */
 export function StickyHeader({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,8 +17,8 @@ export function StickyHeader({ children }: { children: React.ReactNode }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b border-line bg-ivory-light/95 backdrop-blur transition-shadow duration-300",
-        scrolled && "shadow-[0_6px_24px_-12px_rgba(14,22,38,0.25)]",
+        "sticky top-0 z-40 border-b border-line bg-white transition-shadow duration-200",
+        scrolled && "shadow-card",
       )}
     >
       {children}

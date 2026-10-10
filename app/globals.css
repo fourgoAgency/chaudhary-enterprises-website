@@ -1,22 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette — see docs/design-notes.md for contrast rules */
-  --color-navy: #14213d;
-  --color-navy-deep: #0e1626;
-  --color-gold: #b8924a;
-  --color-gold-light: #d9b872;
-  --color-gold-dark: #7a5a24;
-  --color-ivory: #f4eee2;
-  --color-ivory-light: #faf8f3;
-  --color-ink: #1a1a1a;
-  --color-muted: #5b6170;
-  --color-line: #e3dccd;
+  /*
+   * Strict 3-colour palette — see docs/design-notes.md.
+   * Tailwind's default colours are removed so nothing off-palette can sneak in.
+   */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-blue: #0066ff;
+  /* Hover/pressed state of the same blue. */
+  --color-blue-hover: #0052cc;
+  /* #0066FF at ~10% and ~20% on white, for light backgrounds. */
+  --color-blue-tint: #e6f0ff;
+  --color-blue-soft: #cce0ff;
+  /* Greys only for borders, dividers, secondary text and disabled states. */
+  --color-line: #e5e5e5;
+  --color-muted: #6b6b6b;
 
-  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-montserrat), "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", "Helvetica Neue", Arial, sans-serif;
+
+  /* Soft, neutral shadows. */
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 8px 24px -12px rgb(0 0 0 / 0.18);
 
   --container-site: 80rem;
+
+  --animate-pop: pop 300ms ease-out;
 }
 
 @layer base {
@@ -25,22 +36,28 @@
   }
 
   body {
-    @apply bg-ivory-light font-sans text-[15px] leading-[1.7] text-ink antialiased;
+    @apply bg-white font-sans text-[15px] leading-[1.6] text-black antialiased;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-serif leading-tight font-medium tracking-[-0.005em] text-navy;
+    @apply leading-tight font-bold tracking-[-0.015em] text-balance;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-gold;
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+
+  /* Blue surfaces need a white focus ring to stay visible. */
+  .surface-blue :focus-visible {
+    outline-color: var(--color-white);
   }
 
   ::selection {
-    @apply bg-navy text-ivory;
+    @apply bg-blue text-white;
   }
 }
 
@@ -49,11 +66,22 @@
     @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-8;
   }
 
-  .section-title {
-    @apply font-serif text-3xl font-medium text-navy sm:text-[2.5rem];
+  .card {
+    @apply rounded-lg border border-line bg-white;
   }
 }
 
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -90,6 +118,7 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
