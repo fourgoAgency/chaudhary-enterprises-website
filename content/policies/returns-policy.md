@@ -1,6 +1,6 @@
 ---
 title: Returns & Refund Policy
-effectiveDate: "[Month Day, Year]"
+effectiveDate: "October 10, 2026"
 ---
 
 All sales are final except in the cases below. This policy explains when we accept returns, how to request one, and how refunds work.

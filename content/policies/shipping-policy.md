@@ -1,6 +1,6 @@
 ---
 title: Shipping Policy
-effectiveDate: "[Month Day, Year]"
+effectiveDate: "October 10, 2026"
 ---
 
 This policy explains how Chaudhary Enterprises LLC ships orders placed on chaudharyenterprisesllc.com.

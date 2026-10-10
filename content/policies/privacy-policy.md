@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-effectiveDate: "[Month Day, Year]"
+effectiveDate: "October 10, 2026"
 ---
 
 Chaudhary Enterprises LLC ("we", "us", "our") operates chaudharyenterprisesllc.com (the "Site"). This policy explains what information we collect, how we use it, and the choices you have. By using the Site, you agree to this policy.

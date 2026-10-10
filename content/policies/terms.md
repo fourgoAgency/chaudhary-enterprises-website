@@ -1,6 +1,6 @@
 ---
 title: Terms & Conditions
-effectiveDate: "[Month Day, Year]"
+effectiveDate: "October 10, 2026"
 ---
 
 These Terms & Conditions ("Terms") govern your use of chaudharyenterprisesllc.com (the "Site") and all purchases from Chaudhary Enterprises LLC ("we", "us", "our"), a Wyoming limited liability company. By creating an account, placing an order, or using the Site, you agree to these Terms.
