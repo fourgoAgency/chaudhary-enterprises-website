@@ -38,12 +38,7 @@ export function SheetContent({
         {...props}
       >
         <div className="flex items-center justify-between border-b border-line px-5 py-4">
-          <SheetPrimitive.Title
-            className={cn(
-              "font-serif text-xl font-medium tracking-[0.12em] text-navy uppercase",
-              hideTitle && "sr-only",
-            )}
-          >
+          <SheetPrimitive.Title className={cn("font-serif text-2xl font-medium text-navy", hideTitle && "sr-only")}>
             {title}
           </SheetPrimitive.Title>
           <SheetPrimitive.Close

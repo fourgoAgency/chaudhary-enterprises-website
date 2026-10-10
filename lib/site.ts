@@ -22,13 +22,6 @@ export const site = {
       countryCode: "US",
     },
   },
-  topBarMessage: "Wholesale supply for Amazon sellers · Tiered bulk pricing on every order",
-  // TODO: client copy — add real profile URLs. Icons are only shown for non-empty entries.
-  social: {
-    linkedin: "",
-    instagram: "",
-    facebook: "",
-  },
 } as const;
 
 /** "30 N Gould St #59563, Sheridan, WY 82801, United States" */
@@ -50,19 +43,17 @@ export const routes = {
 } as const;
 
 export const mainNav = [
-  { label: "Home", href: routes.home },
-  { label: "Shop", href: routes.shop },
+  { label: "Shop all", href: routes.shop },
+  { label: "About", href: routes.about },
 ] as const;
 
-export const quickLinks = [
-  { label: "Shop", href: routes.shop },
-  { label: "About us", href: routes.about },
+export const accountNav = [
+  { label: "My account", href: routes.account },
   { label: "Wishlist", href: routes.wishlist },
-  { label: "My Account", href: routes.account },
   { label: "Cart", href: routes.cart },
 ] as const;
 
-// Footer customer-service links. The policy pages are pending client approval.
+// Footer policy links. Page content is supplied by the client.
 export const serviceNav = [
   { label: "Shipping & Returns", href: "/shipping-returns" },
   { label: "Privacy Policy", href: "/privacy" },

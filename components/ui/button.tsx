@@ -3,12 +3,11 @@ import { Slot } from "radix-ui";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 font-sans text-xs font-semibold tracking-label whitespace-nowrap uppercase transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 font-sans text-sm font-semibold whitespace-nowrap transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         primary: "bg-navy text-ivory-light hover:bg-navy-deep",
-        gold: "bg-gold text-navy-deep hover:bg-gold-light",
         outline: "border border-navy text-navy hover:bg-navy hover:text-ivory-light",
         "outline-light": "border border-ivory/70 text-ivory-light hover:bg-ivory-light hover:text-navy",
         ghost: "text-navy hover:bg-ivory",
@@ -17,7 +16,7 @@ export const buttonVariants = cva(
       size: {
         sm: "h-9 px-4",
         md: "h-11 px-6",
-        lg: "h-13 px-8",
+        lg: "h-12 px-7",
         icon: "size-10",
       },
     },

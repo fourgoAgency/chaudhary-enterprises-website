@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { cacheLife } from "next/cache";
-import { Building2, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
-import { FacebookIcon, InstagramIcon, LinkedinIcon, PaymentBadges } from "@/components/brand/icons";
-import { NewsletterForm } from "@/components/newsletter-form";
-import { formattedAddress, quickLinks, routes, serviceNav, site } from "@/lib/site";
+import { accountNav, mainNav, routes, serviceNav, site } from "@/lib/site";
 
 async function CopyrightYear() {
   "use cache";
@@ -12,110 +9,79 @@ async function CopyrightYear() {
   return <>{new Date().getFullYear()}</>;
 }
 
-function FooterHeading({ children }: { children: React.ReactNode }) {
-  return <h2 className="mb-5 font-sans text-[11px] font-semibold tracking-eyebrow text-gold uppercase">{children}</h2>;
+const linkClass = "text-ivory/85 transition-colors hover:text-ivory-light hover:underline underline-offset-4";
+
+function LinkColumn({ title, links }: { title: string; links: readonly { label: string; href: string }[] }) {
+  return (
+    <nav aria-label={title}>
+      <h2 className="font-sans text-sm font-semibold text-ivory-light">{title}</h2>
+      <ul className="mt-4 space-y-2.5 text-sm">
+        {links.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} className={linkClass}>
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 }
 
-const linkClass = "text-sm text-ivory transition-colors hover:text-gold-light";
-
-const socials = [
-  { label: "LinkedIn", href: site.social.linkedin, Icon: LinkedinIcon },
-  { label: "Instagram", href: site.social.instagram, Icon: InstagramIcon },
-  { label: "Facebook", href: site.social.facebook, Icon: FacebookIcon },
-].filter((s) => s.href);
-
 export function Footer() {
+  const a = site.contact.address;
+
   return (
     <footer className="bg-navy-deep text-ivory">
-      <div className="h-px bg-linear-to-r from-transparent via-gold to-transparent" />
-      <div className="container-site grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.5fr]">
-        <div>
-          <Link href={routes.home} aria-label={`${site.name} — home`} className="inline-block">
-            <Logo tone="dark" className="w-60" />
+      <div className="container-site grid gap-x-10 gap-y-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+        <div className="max-w-sm">
+          <Link href={routes.home} aria-label={`${site.name} home`} className="inline-block">
+            <Logo tone="dark" className="w-56" />
           </Link>
-          <p className="mt-6 max-w-xs text-sm leading-relaxed text-ivory">
-            {site.tagline}. Genuine, brand-new products supplied in bulk to Amazon sellers, retailers and online sellers
-            across the United States.
+          <p className="mt-6 text-sm leading-relaxed text-ivory/85">
+            Wholesale distributor of genuine, brand-new products for retailers and online sellers across the United
+            States.
           </p>
-          {socials.length > 0 && (
-            <ul className="mt-6 flex gap-3" aria-label="Social media">
-              {socials.map(({ label, href, Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${label} (opens in a new tab)`}
-                    className="inline-flex size-9 items-center justify-center border border-ivory/25 text-ivory transition-colors hover:border-gold hover:text-gold-light"
-                  >
-                    <Icon className="size-4" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
 
-        <nav aria-label="Quick links">
-          <FooterHeading>Quick links</FooterHeading>
-          <ul className="space-y-3">
-            {quickLinks.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className={linkClass}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <LinkColumn title="Shop" links={mainNav} />
+        <LinkColumn title="Account" links={accountNav} />
+        <LinkColumn title="Policies" links={serviceNav} />
+      </div>
 
-        <nav aria-label="Customer service">
-          <FooterHeading>Customer service</FooterHeading>
-          <ul className="space-y-3">
-            {serviceNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className={linkClass}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div>
-          <FooterHeading>Contact</FooterHeading>
-          <address className="space-y-3 text-sm not-italic">
-            <p className="flex items-start gap-3">
-              <Building2 className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
-              <span className="font-semibold">{site.name}</span>
+      <div className="container-site">
+        <address className="grid gap-6 border-t border-ivory/15 py-8 text-sm not-italic sm:grid-cols-3">
+          <div>
+            <p className="font-semibold text-ivory-light">{site.name}</p>
+            <p className="mt-1 text-ivory/85">
+              {a.street}
+              <br />
+              {a.city}, {a.region} {a.postalCode}
+              <br />
+              {a.country}
             </p>
-            <p className="flex items-start gap-3">
-              <MapPin className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
-              <span>{formattedAddress}</span>
-            </p>
-            <a href={site.contact.phoneHref} className={`flex items-start gap-3 ${linkClass}`}>
-              <Phone className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
+          </div>
+          <div>
+            <p className="font-semibold text-ivory-light">Phone</p>
+            <a href={site.contact.phoneHref} className={`mt-1 inline-block ${linkClass}`}>
               {site.contact.phone}
             </a>
-            <a href={`mailto:${site.contact.email}`} className={`flex items-start gap-3 break-all ${linkClass}`}>
-              <Mail className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
+          </div>
+          <div>
+            <p className="font-semibold text-ivory-light">Email</p>
+            <a href={`mailto:${site.contact.email}`} className={`mt-1 inline-block break-all ${linkClass}`}>
               {site.contact.email}
             </a>
-          </address>
-
-          <div className="mt-8">
-            <FooterHeading>Trade newsletter</FooterHeading>
-            <NewsletterForm tone="dark" />
           </div>
-        </div>
+        </address>
       </div>
 
       <div className="border-t border-ivory/15">
-        <div className="container-site flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
-          <p className="text-xs tracking-wide text-ivory">
+        <div className="container-site flex flex-col gap-2 py-6 text-xs text-ivory/70 sm:flex-row sm:justify-between">
+          <p>
             © <CopyrightYear /> {site.name}. All rights reserved.
           </p>
-          <PaymentBadges className="flex flex-wrap gap-2" />
+          <p>Card payments are processed securely by Stripe.</p>
         </div>
       </div>
     </footer>

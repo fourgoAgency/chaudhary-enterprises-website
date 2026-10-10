@@ -10,9 +10,8 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <section className="container-site flex min-h-[55vh] flex-col items-center justify-center py-24 text-center">
-      <p className="eyebrow">Error 404</p>
-      <h1 className="section-title mt-4">Page not found</h1>
-      <div className="gold-rule mt-6" />
+      <p className="text-sm text-muted">Error 404</p>
+      <h1 className="section-title mt-2">Page not found</h1>
       <p className="mt-6 max-w-md text-muted">
         The page you&apos;re looking for has moved or no longer exists. Browse our wholesale range or head back to the
         home page.

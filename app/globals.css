@@ -16,9 +16,6 @@
   --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-sans: var(--font-montserrat), "Montserrat", "Helvetica Neue", Arial, sans-serif;
 
-  --tracking-label: 0.14em;
-  --tracking-eyebrow: 0.3em;
-
   --container-site: 80rem;
 }
 
@@ -35,7 +32,7 @@
   h2,
   h3,
   h4 {
-    @apply font-serif leading-tight font-medium text-navy;
+    @apply font-serif leading-tight font-medium tracking-[-0.005em] text-navy;
   }
 
   :focus-visible {
@@ -52,17 +49,8 @@
     @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-8;
   }
 
-  /* Small uppercase gold label above section titles */
-  .eyebrow {
-    @apply text-[11px] font-semibold tracking-eyebrow text-gold-dark uppercase;
-  }
-
   .section-title {
-    @apply font-serif text-3xl font-medium tracking-[0.12em] text-navy uppercase sm:text-4xl;
-  }
-
-  .gold-rule {
-    @apply h-px w-16 bg-linear-to-r from-gold-dark via-gold-light to-gold-dark;
+    @apply font-serif text-3xl font-medium text-navy sm:text-[2.5rem];
   }
 }
 

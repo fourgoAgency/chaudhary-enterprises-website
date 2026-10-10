@@ -186,3 +186,14 @@ A wishlist heart sits top-right on the image. There is no quick view, which keep
   3. Customer service: Shipping & Returns, Privacy, Terms.
   4. Contact details (legal name, full address, phone, email — always visible), then the newsletter signup.
 - **Row 2:** payment icons (Visa, Mastercard, Amex, Apple Pay, Google Pay; Stripe-supported), then "© {year} Chaudhary Enterprises LLC. All rights reserved."
+
+## Revision (2026-10-10): less template, more content
+
+Client feedback: the first pass looked too AI-generated. These rules now override the sections above:
+
+- **No decorative chrome:** no eyebrow labels over headings, no gold divider rules, no wide letter-spaced uppercase titles. Headings are sentence case in Cormorant at normal tracking; buttons are sentence case.
+- **Left-aligned, content-led sections.** The hero is a split layout: headline and CTAs on the left, a live tier-price table from a real catalog product on the right. No full-screen empty hero.
+- **Gold is an accent only** (links, the mission quote rule, step numbers). Primary buttons are navy.
+- **No top bar, social links, business hours or newsletter.** The client doesn't want them.
+- **Footer** is plain text columns (Shop, Account, Policies) plus the legal name, address, phone and email, with no icon per line and no fake payment badges.
+- **Header:** logo, Categories mega-menu, Shop all, About; search and account/wishlist/cart icons on the right.

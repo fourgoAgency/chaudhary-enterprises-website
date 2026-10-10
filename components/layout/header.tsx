@@ -1,37 +1,17 @@
 import Link from "next/link";
-import { Heart, Mail, Phone, ShoppingBag, UserRound } from "lucide-react";
+import { Heart, ShoppingBag, UserRound } from "lucide-react";
 import { Logo, LogoMark } from "@/components/brand/logo";
+import { DesktopNav } from "@/components/layout/desktop-nav";
 import { HeaderIconLink } from "@/components/layout/header-icon-link";
 import { MobileNav } from "@/components/layout/mobile-nav";
-import { NavLinks } from "@/components/layout/nav-links";
 import { SearchForm } from "@/components/layout/search-form";
 import { StickyHeader } from "@/components/layout/sticky-header";
+import { getCategories } from "@/lib/catalog";
 import { routes, site } from "@/lib/site";
 
-function TopBar() {
-  return (
-    <div className="bg-navy-deep text-ivory">
-      <div className="container-site flex h-9 items-center justify-center text-[11px] tracking-[0.12em] uppercase lg:justify-between">
-        <p className="min-w-0 truncate">{site.topBarMessage}</p>
-        <div className="hidden shrink-0 items-center gap-6 whitespace-nowrap lg:flex">
-          <a
-            href={`mailto:${site.contact.email}`}
-            className="flex items-center gap-2 normal-case hover:text-gold-light"
-          >
-            <Mail className="size-3.5 text-gold" aria-hidden />
-            <span className="tracking-wide">{site.contact.email}</span>
-          </a>
-          <a href={site.contact.phoneHref} className="flex items-center gap-2 hover:text-gold-light">
-            <Phone className="size-3.5 text-gold" aria-hidden />
-            <span className="tracking-wide">{site.contact.phone}</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
+export async function Header() {
+  const categories = await getCategories();
 
-export function Header() {
   return (
     <>
       <a
@@ -40,33 +20,24 @@ export function Header() {
       >
         Skip to content
       </a>
-      <TopBar />
       <StickyHeader>
-        <div className="container-site grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4 lg:h-20">
-          {/* Left: burger (mobile) / logo (desktop) */}
-          <div className="flex items-center">
-            <div className="lg:hidden">
-              <MobileNav />
-            </div>
-            <Link href={routes.home} className="hidden lg:block" aria-label={`${site.name} — home`}>
-              <Logo className="w-56 xl:w-64" />
-            </Link>
+        <div className="container-site flex h-16 items-center gap-4 lg:h-[4.75rem] lg:gap-10">
+          <div className="lg:hidden">
+            <MobileNav categories={categories} />
           </div>
 
-          {/* Centre: monogram (mobile) / nav (desktop) */}
-          <div className="flex justify-center">
-            <Link href={routes.home} className="lg:hidden" aria-label={`${site.name} — home`}>
-              <LogoMark className="size-12" />
-            </Link>
-            <nav aria-label="Main" className="hidden lg:block">
-              <NavLinks />
-            </nav>
+          <Link href={routes.home} aria-label={`${site.name} home`} className="shrink-0">
+            <LogoMark className="size-11 lg:hidden" />
+            <Logo className="hidden w-52 lg:block xl:w-60" />
+          </Link>
+
+          <div className="hidden lg:block">
+            <DesktopNav categories={categories} />
           </div>
 
-          {/* Right: search + account, wishlist, cart */}
-          <div className="flex items-center justify-end gap-1 sm:gap-2">
-            <SearchForm className="mr-2 hidden w-56 lg:block xl:w-64" />
-            {/* TODO(phase 6): switch to "My Account" when signed in. */}
+          <div className="ml-auto flex items-center gap-1 sm:gap-2">
+            <SearchForm className="mr-3 hidden w-64 lg:block xl:w-80" />
+            {/* TODO(phase 6): switch to "My account" when signed in. */}
             <HeaderIconLink
               href={routes.login}
               label="Login / Register"
