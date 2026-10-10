@@ -40,9 +40,7 @@ export function ShopPage({ category, searchParams }: ShopPageProps) {
           {category ? category.name : "All products"}
         </h1>
         <p className="mt-3 text-muted">
-          {category
-            ? category.description
-            : "Wholesale pricing on every product, with lower unit prices as your order grows."}
+          {category ? category.description : "Genuine, brand-new products shipped across the United States."}
         </p>
       </header>
 
@@ -136,12 +134,7 @@ async function ShopResults({ category, searchParams }: ShopPageProps) {
 }
 
 function activeFilterCount(state: ShopState) {
-  return (
-    state.brands.length +
-    Number(state.inStock) +
-    Number(state.min !== undefined || state.max !== undefined) +
-    Number(state.moqMin !== undefined || state.moqMax !== undefined)
-  );
+  return state.brands.length + Number(state.inStock) + Number(state.min !== undefined || state.max !== undefined);
 }
 
 function ViewToggle({ basePath, state }: { basePath: string; state: ShopState }) {
@@ -184,14 +177,6 @@ function ActiveFilters({ basePath, state }: { basePath: string; state: ShopState
           {
             label: `Price ${state.min !== undefined ? money(state.min) : "any"} – ${state.max !== undefined ? money(state.max) : "any"}`,
             remove: { ...reset, min: undefined, max: undefined },
-          },
-        ]
-      : []),
-    ...(state.moqMin !== undefined || state.moqMax !== undefined
-      ? [
-          {
-            label: `MOQ ${state.moqMin ?? 0} – ${state.moqMax ?? "any"}`,
-            remove: { ...reset, moqMin: undefined, moqMax: undefined },
           },
         ]
       : []),

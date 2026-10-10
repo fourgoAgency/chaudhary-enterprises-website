@@ -66,8 +66,6 @@ export function ShopFilters({
         min: optionalNumber(data.get("min")),
         max: optionalNumber(data.get("max")),
         inStock: data.get("stock") === "1",
-        moqMin: optionalNumber(data.get("moqMin")),
-        moqMax: optionalNumber(data.get("moqMax")),
       }),
       { scroll: false },
     );
@@ -148,10 +146,10 @@ export function ShopFilters({
         </label>
       </FilterGroup>
 
-      <FilterGroup title="Unit price (USD)">
+      <FilterGroup title="Price (USD)">
         <div className="flex items-center gap-2">
           <label htmlFor={id("min")} className="sr-only">
-            Minimum unit price
+            Minimum price
           </label>
           <input
             id={id("min")}
@@ -168,7 +166,7 @@ export function ShopFilters({
             to
           </span>
           <label htmlFor={id("max")} className="sr-only">
-            Maximum unit price
+            Maximum price
           </label>
           <input
             id={id("max")}
@@ -179,40 +177,6 @@ export function ShopFilters({
             step="0.01"
             placeholder={dollars(facets.price.max)}
             defaultValue={state.max}
-            className={inputClass}
-          />
-        </div>
-      </FilterGroup>
-
-      <FilterGroup title="Minimum order (units)">
-        <div className="flex items-center gap-2">
-          <label htmlFor={id("moqMin")} className="sr-only">
-            Smallest minimum order
-          </label>
-          <input
-            id={id("moqMin")}
-            name="moqMin"
-            type="number"
-            inputMode="numeric"
-            min={0}
-            placeholder={String(facets.moq.min)}
-            defaultValue={state.moqMin}
-            className={inputClass}
-          />
-          <span className="text-muted" aria-hidden>
-            to
-          </span>
-          <label htmlFor={id("moqMax")} className="sr-only">
-            Largest minimum order
-          </label>
-          <input
-            id={id("moqMax")}
-            name="moqMax"
-            type="number"
-            inputMode="numeric"
-            min={0}
-            placeholder={String(facets.moq.max)}
-            defaultValue={state.moqMax}
             className={inputClass}
           />
         </div>

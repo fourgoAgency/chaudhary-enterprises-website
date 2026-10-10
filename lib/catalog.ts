@@ -1,12 +1,10 @@
 import { categories } from "@/data/categories";
 import { categoryOverrides, products } from "@/data/products";
-import { getFromPrice } from "@/lib/pricing";
 import type { SortKey } from "@/lib/shop-params";
 import type { Category, CategorySlug, Product } from "@/lib/types";
 
 // Catalog data layer. Everything outside this file reads products through these async functions,
-// so the static data can later be swapped for a CMS (Sanity/Shopify) or the database without
-// touching pages or components.
+// so data/products.json can later be swapped for a CMS without touching pages or components.
 
 export const DEFAULT_PER_PAGE = 12;
 
@@ -14,12 +12,10 @@ export type ProductQuery = {
   q?: string;
   category?: CategorySlug;
   brands?: string[];
-  /** Filters on the "From" (lowest tier) unit price, in cents. */
+  /** Price filter, in cents. */
   minPrice?: number;
   maxPrice?: number;
   inStockOnly?: boolean;
-  moqMin?: number;
-  moqMax?: number;
   sort?: SortKey;
   page?: number;
   perPage?: number;
@@ -35,9 +31,8 @@ export type ProductQueryResult = {
 
 export type CatalogFacets = {
   brands: { name: string; count: number }[];
-  /** Bounds of the "From" unit price, in cents. */
+  /** Price bounds, in cents. */
   price: { min: number; max: number };
-  moq: { min: number; max: number };
 };
 
 // ---- Categories ----
@@ -98,11 +93,8 @@ export async function queryProducts(query: ProductQuery = {}): Promise<ProductQu
     if (query.category && p.category !== query.category) return false;
     if (brands && !brands.has(p.brand)) return false;
     if (query.inStockOnly && p.stock === "out_of_stock") return false;
-    const from = getFromPrice(p.tiers);
-    if (query.minPrice !== undefined && from < query.minPrice) return false;
-    if (query.maxPrice !== undefined && from > query.maxPrice) return false;
-    if (query.moqMin !== undefined && p.moq < query.moqMin) return false;
-    if (query.moqMax !== undefined && p.moq > query.moqMax) return false;
+    if (query.minPrice !== undefined && p.price < query.minPrice) return false;
+    if (query.maxPrice !== undefined && p.price > query.maxPrice) return false;
     if (terms.length) {
       const haystack = searchText(p);
       if (!terms.every((t) => haystack.includes(t))) return false;
@@ -129,13 +121,11 @@ export async function getFacets(category?: CategorySlug): Promise<CatalogFacets>
   const scope = category ? products.filter((p) => p.category === category) : products;
   const brandCounts = new Map<string, number>();
   for (const p of scope) brandCounts.set(p.brand, (brandCounts.get(p.brand) ?? 0) + 1);
-  const fromPrices = scope.map((p) => getFromPrice(p.tiers));
-  const moqs = scope.map((p) => p.moq);
+  const prices = scope.map((p) => p.price);
 
   return {
     brands: [...brandCounts].map(([name, count]) => ({ name, count })).sort((a, b) => a.name.localeCompare(b.name)),
-    price: { min: Math.min(...fromPrices), max: Math.max(...fromPrices) },
-    moq: { min: Math.min(...moqs), max: Math.max(...moqs) },
+    price: { min: Math.min(...prices), max: Math.max(...prices) },
   };
 }
 
@@ -148,7 +138,7 @@ function normalize(value: string) {
 }
 
 function searchText(p: Product) {
-  return normalize([p.name, p.sku, p.upc, p.asin, p.brand, categoryNames.get(p.category)].join(" "));
+  return normalize([p.name, p.sku, p.upc, p.brand, categoryNames.get(p.category)].join(" "));
 }
 
 function byNewest(a: Product, b: Product) {
@@ -157,7 +147,7 @@ function byNewest(a: Product, b: Product) {
 
 const comparators: Record<SortKey, (a: Product, b: Product) => number> = {
   featured: (a, b) => Number(!!b.featured) - Number(!!a.featured) || a.position - b.position,
-  "price-asc": (a, b) => getFromPrice(a.tiers) - getFromPrice(b.tiers),
-  "price-desc": (a, b) => getFromPrice(b.tiers) - getFromPrice(a.tiers),
+  "price-asc": (a, b) => a.price - b.price,
+  "price-desc": (a, b) => b.price - a.price,
   newest: byNewest,
 };

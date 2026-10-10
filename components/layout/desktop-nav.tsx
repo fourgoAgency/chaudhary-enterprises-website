@@ -44,10 +44,10 @@ export function DesktopNav({ categories }: { categories: Category[] }) {
                 ))}
               </ul>
               <div className="border-l border-line pl-8 text-sm">
-                <p className="font-serif text-xl text-navy">Buying in bulk?</p>
+                <p className="font-serif text-xl text-navy">New to our store?</p>
                 <p className="mt-2 text-muted">
-                  Every product has tiered pricing that drops as your order grows. Larger or recurring orders can be
-                  quoted directly.
+                  Add products to your cart and send your order. We confirm stock, shipping and your total by email
+                  before you pay.
                 </p>
                 <NavigationMenu.Link asChild>
                   <Link

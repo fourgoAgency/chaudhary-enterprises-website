@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/shop/[category]">
   const category = await getCategory((await params).category);
   if (!category) return {};
   return {
-    title: `${category.name} wholesale`,
+    title: category.name,
     description: category.description,
     alternates: { canonical: `/shop/${category.slug}` },
   };

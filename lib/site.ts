@@ -1,10 +1,10 @@
-// Central business details. Contact values must match the LLC filing and Amazon account exactly.
+// Central business details. Contact values must match the LLC filing exactly.
 export const site = {
   name: "Chaudhary Enterprises LLC",
   shortName: "Chaudhary Enterprises",
-  tagline: "Trusted Wholesale Supply for Modern Retail",
+  tagline: "Genuine products, delivered across the US",
   description:
-    "Chaudhary Enterprises LLC is a Wyoming-based wholesale distributor supplying genuine branded products in bulk to retailers and online sellers across the United States.",
+    "Shop genuine, brand-new products from Chaudhary Enterprises LLC of Sheridan, Wyoming, with delivery across the United States.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://chaudharyenterprisesllc.com",
   // ISO 4217 code used for all prices
   currency: "USD",

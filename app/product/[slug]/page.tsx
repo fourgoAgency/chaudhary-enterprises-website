@@ -10,7 +10,7 @@ import { StockBadge } from "@/components/product/stock-badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PLACEHOLDER_IMAGE } from "@/data/products";
 import { getAllProducts, getCategory, getProductBySlug, getRelatedProducts } from "@/lib/catalog";
-import { formatPrice, getFromPrice } from "@/lib/pricing";
+import { formatPrice } from "@/lib/pricing";
 import { routes, site } from "@/lib/site";
 import type { Product } from "@/lib/types";
 
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/product/[slug]">): Promise<Metadata> {
   const product = await getProductBySlug((await params).slug);
   if (!product) return {};
-  const description = `${product.description} Wholesale from ${formatPrice(getFromPrice(product.tiers))} per unit, MOQ ${product.moq} units.`;
+  const description = `${product.description} ${formatPrice(product.price)}.`;
   const image = product.images[0].src;
   return {
     title: product.name,
@@ -49,7 +49,6 @@ const availability = {
 } as const;
 
 function ProductJsonLd({ product }: { product: Product }) {
-  const prices = product.tiers.map((t) => t.unitPrice / 100);
   const images = product.images.filter((i) => i.src !== PLACEHOLDER_IMAGE).map((i) => new URL(i.src, site.url).href);
   return (
     <JsonLd
@@ -63,11 +62,9 @@ function ProductJsonLd({ product }: { product: Product }) {
         description: product.description,
         ...(images.length ? { image: images } : {}),
         offers: {
-          "@type": "AggregateOffer",
+          "@type": "Offer",
           priceCurrency: site.currency,
-          lowPrice: Math.min(...prices).toFixed(2),
-          highPrice: Math.max(...prices).toFixed(2),
-          offerCount: product.tiers.length,
+          price: (product.price / 100).toFixed(2),
           availability: availability[product.stock],
           url: new URL(`/product/${product.slug}`, site.url).href,
           seller: { "@id": `${site.url}/#organization` },
@@ -109,8 +106,6 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             { label: "SKU", value: product.sku },
             ...(product.upc ? [{ label: "UPC", value: product.upc }] : []),
             ...product.specs,
-            { label: "Case pack", value: `${product.casePack} units` },
-            { label: "Minimum order", value: `${product.moq} units` },
           ].map((row) => (
             <div key={row.label} className="grid grid-cols-[10rem_1fr] gap-4 py-3">
               <dt className="text-muted">{row.label}</dt>
@@ -126,9 +121,8 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
       content: (
         <div className="space-y-4">
           <p>
-            This product ships in sealed cases of {product.casePack} units. We ship to business addresses in the United
-            States, including third-party warehouses, prep centers and Amazon fulfilment centers. Add any shipment IDs
-            or FBA prep instructions in the order notes.
+            We ship to addresses across the United States. After you send your order, we confirm availability, shipping
+            cost and delivery time by email before anything is charged.
           </p>
           <p>
             Processing times, carriers and delivery estimates are in our{" "}
@@ -177,9 +171,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
                   sku: product.sku,
                   name: product.name,
                   image: product.images[0].src,
-                  moq: product.moq,
-                  casePack: product.casePack,
-                  tiers: product.tiers,
+                  price: product.price,
                   stock: product.stock,
                 }}
               />
@@ -195,7 +187,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
       {related.length > 0 && (
         <section className="border-t border-line bg-white">
           <div className="container-site py-14 sm:py-20">
-            <h2 className="section-title">You may also need</h2>
+            <h2 className="section-title">You may also like</h2>
             <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />

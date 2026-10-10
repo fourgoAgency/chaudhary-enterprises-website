@@ -3,25 +3,19 @@
 import { useSyncExternalStore } from "react";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { normalizeQuantity, type PricingInfo } from "@/lib/pricing";
+import { normalizeQuantity } from "@/lib/pricing";
 import type { Product } from "@/lib/types";
 
-// Cart saved in the browser (localStorage). Lines keep a snapshot of pricing for display only;
+// Cart saved in the browser (localStorage). Lines keep a snapshot of the price for display only;
 // order totals are always recalculated on the server from the catalog.
 
-export type CartLine = PricingInfo & {
-  slug: string;
-  sku: string;
-  name: string;
-  image: string;
-  quantity: number;
-};
+export type CartProduct = Pick<Product, "slug" | "sku" | "name" | "price"> & { image: string };
 
-export type CartProduct = Pick<Product, "slug" | "sku" | "name" | "moq" | "casePack" | "tiers"> & { image: string };
+export type CartLine = CartProduct & { quantity: number };
 
 type CartState = {
   lines: CartLine[];
-  add: (product: CartProduct, quantity: number) => void;
+  add: (product: CartProduct, quantity?: number) => void;
   setQuantity: (slug: string, quantity: number) => void;
   remove: (slug: string) => void;
   clear: () => void;
@@ -30,33 +24,31 @@ type CartState = {
 };
 
 /** Copy only the fields a cart line stores (callers may pass extra props such as stock). */
-function toLine({ slug, sku, name, image, moq, casePack, tiers }: CartProduct) {
-  return { slug, sku, name, image, moq, casePack, tiers };
+function toLine({ slug, sku, name, image, price }: CartProduct): CartProduct {
+  return { slug, sku, name, image, price };
 }
 
 export const useCart = create<CartState>()(
   persist(
     (set, get) => ({
       lines: [],
-      add: (product, quantity) =>
+      add: (product, quantity = 1) =>
         set((state) => {
           const existing = state.lines.find((l) => l.slug === product.slug);
           if (existing) {
             return {
               lines: state.lines.map((l) =>
                 l.slug === product.slug
-                  ? { ...l, ...toLine(product), quantity: normalizeQuantity(product, l.quantity + quantity) }
+                  ? { ...toLine(product), quantity: normalizeQuantity(l.quantity + quantity) }
                   : l,
               ),
             };
           }
-          return {
-            lines: [...state.lines, { ...toLine(product), quantity: normalizeQuantity(product, quantity) }],
-          };
+          return { lines: [...state.lines, { ...toLine(product), quantity: normalizeQuantity(quantity) }] };
         }),
       setQuantity: (slug, quantity) =>
         set((state) => ({
-          lines: state.lines.map((l) => (l.slug === slug ? { ...l, quantity: normalizeQuantity(l, quantity) } : l)),
+          lines: state.lines.map((l) => (l.slug === slug ? { ...l, quantity: normalizeQuantity(quantity) } : l)),
         })),
       remove: (slug) => set((state) => ({ lines: state.lines.filter((l) => l.slug !== slug) })),
       clear: () => set({ lines: [] }),
@@ -67,19 +59,21 @@ export const useCart = create<CartState>()(
         set({
           lines: lines.flatMap((l) => {
             const p = bySlug.get(l.slug);
-            if (!p) return [];
-            return [{ ...toLine(p), quantity: normalizeQuantity(p, l.quantity) }];
+            return p ? [{ ...toLine(p), quantity: l.quantity }] : [];
           }),
         });
         return removed;
       },
     }),
-    { name: "ce-cart", version: 1, storage: createJSONStorage(() => localStorage) },
+    {
+      name: "ce-cart",
+      version: 2,
+      storage: createJSONStorage(() => localStorage),
+      // v1 carts held wholesale case quantities; start those fresh.
+      migrate: () => ({ lines: [] }),
+    },
   ),
 );
-
-/** Total number of units in the cart. */
-export const selectItemCount = (state: CartState) => state.lines.reduce((sum, l) => sum + l.quantity, 0);
 
 const noopSubscribe = () => () => {};
 

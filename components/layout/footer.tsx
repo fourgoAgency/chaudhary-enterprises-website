@@ -39,8 +39,7 @@ export function Footer() {
             <Logo tone="dark" className="w-56" />
           </Link>
           <p className="mt-6 text-sm leading-relaxed text-ivory/85">
-            Wholesale distributor of genuine, brand-new products for retailers and online sellers across the United
-            States.
+            Genuine, brand-new products from Sheridan, Wyoming, delivered to customers across the United States.
           </p>
         </div>
 

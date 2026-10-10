@@ -8,7 +8,7 @@ import { QuantityStepper } from "@/components/product/quantity-stepper";
 import { Button } from "@/components/ui/button";
 import { getLiveCartProducts } from "@/lib/actions/cart";
 import { useCart, useHydrated, type CartLine } from "@/lib/cart-store";
-import { formatPrice, getTierRangeLabel, priceCart, priceLine } from "@/lib/pricing";
+import { formatPrice, priceCart } from "@/lib/pricing";
 import { routes } from "@/lib/site";
 import type { StockStatus } from "@/lib/types";
 
@@ -46,7 +46,7 @@ export function CartView() {
         <ShoppingBag className="mx-auto size-8 text-muted" strokeWidth={1.5} aria-hidden />
         <p className="mt-4 font-serif text-2xl text-navy">Your cart is empty</p>
         {removed.length > 0 && <RemovedNotice names={removed} />}
-        <p className="mt-2 text-sm text-muted">Browse the catalog and add products in case quantities.</p>
+        <p className="mt-2 text-sm text-muted">Browse our products and add something you like.</p>
         <Button asChild className="mt-8">
           <Link href={routes.shop}>Browse products</Link>
         </Button>
@@ -77,28 +77,17 @@ export function CartView() {
       <aside aria-label="Order summary" className="lg:sticky lg:top-28 lg:self-start">
         <div className="border border-line bg-white p-6">
           <h2 className="font-serif text-2xl text-navy">Order summary</h2>
-          <dl className="mt-5 space-y-3 text-sm">
-            <div className="flex justify-between">
+          <dl className="mt-5 text-sm">
+            <div className="flex items-baseline justify-between">
               <dt className="text-muted">
-                {lines.length} {lines.length === 1 ? "product" : "products"}, {totals.units} units
+                Subtotal ({totals.items} {totals.items === 1 ? "item" : "items"})
               </dt>
-              <dd className="tabular-nums">{formatPrice(totals.baseTotal)}</dd>
-            </div>
-            {totals.savings > 0 && (
-              <div className="flex justify-between text-emerald-800">
-                <dt>Bulk tier savings</dt>
-                <dd className="tabular-nums">−{formatPrice(totals.savings)}</dd>
-              </div>
-            )}
-            <div className="flex items-baseline justify-between border-t border-line pt-4">
-              <dt className="font-semibold text-navy">Subtotal</dt>
               <dd className="text-xl font-semibold text-navy tabular-nums">{formatPrice(totals.subtotal)}</dd>
             </div>
           </dl>
           <p className="mt-4 flex gap-2 text-xs leading-relaxed text-muted">
             <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            Sales tax and shipping are added to your invoice. Tax is not charged on resale purchases with a valid resale
-            certificate. No payment is taken online.
+            Shipping and any sales tax are confirmed by email with your order. No payment is taken online.
           </p>
           {unavailable.length > 0 && (
             <p role="alert" className="mt-4 text-sm text-red-800">
@@ -123,49 +112,31 @@ export function CartView() {
 function CartLineRow({ line, outOfStock }: { line: CartLine; outOfStock: boolean }) {
   const setQuantity = useCart((s) => s.setQuantity);
   const remove = useCart((s) => s.remove);
-  const price = priceLine(line, line.quantity);
-  const base = line.tiers[0].unitPrice;
   const href = `/product/${line.slug}`;
-  const qtyId = `qty-${line.slug}`;
 
   return (
     <li className="grid grid-cols-[5rem_1fr] gap-4 border-b border-line py-6 sm:grid-cols-[6rem_1fr_auto] sm:gap-6">
-      <Link href={href} className="relative aspect-square border border-line bg-ivory" tabIndex={-1} aria-hidden>
-        <Image src={line.image} alt="" fill sizes="6rem" className="object-cover" />
+      <Link href={href} className="relative aspect-square border border-line bg-white" tabIndex={-1} aria-hidden>
+        <Image src={line.image} alt="" fill sizes="6rem" className="object-contain p-1.5" />
       </Link>
 
       <div className="min-w-0">
-        <p className="text-xs text-muted">SKU {line.sku}</p>
-        <h3 className="mt-0.5 font-sans text-[15px] leading-snug font-medium text-ink">
+        <h3 className="font-sans text-[15px] leading-snug font-medium text-ink">
           <Link href={href} className="hover:underline hover:underline-offset-4">
             {line.name}
           </Link>
         </h3>
-        <p className="mt-2 text-sm">
-          <span className="font-semibold text-navy tabular-nums">{formatPrice(price.unitPrice)}</span>
-          <span className="text-muted"> / unit</span>
-          {price.unitPrice < base && (
-            <s className="ml-2 text-xs text-muted tabular-nums" aria-label={`was ${formatPrice(base)}`}>
-              {formatPrice(base)}
-            </s>
-          )}
-          <span className="ml-2 text-xs text-muted">({getTierRangeLabel(line.tiers, price.tierIndex)} units tier)</span>
-        </p>
+        <p className="mt-1 text-sm text-muted tabular-nums">{formatPrice(line.price)} each</p>
         {outOfStock && <p className="mt-1 text-sm font-medium text-red-800">Out of stock</p>}
 
         <div className="mt-4 flex flex-wrap items-center gap-4">
           <QuantityStepper
-            id={qtyId}
+            id={`qty-${line.slug}`}
             size="sm"
             value={line.quantity}
-            moq={line.moq}
-            casePack={line.casePack}
             onChange={(q) => setQuantity(line.slug, q)}
             aria-label={`Quantity for ${line.name}`}
           />
-          <span className="text-xs text-muted">
-            MOQ {line.moq} · case of {line.casePack}
-          </span>
           <button
             type="button"
             onClick={() => remove(line.slug)}
@@ -177,12 +148,9 @@ function CartLineRow({ line, outOfStock }: { line: CartLine; outOfStock: boolean
         </div>
       </div>
 
-      <div className="col-start-2 text-left sm:col-start-3 sm:text-right">
-        <p className="font-semibold text-navy tabular-nums">{formatPrice(price.lineTotal)}</p>
-        {price.savings > 0 && (
-          <p className="mt-0.5 text-xs text-emerald-800 tabular-nums">Save {formatPrice(price.savings)}</p>
-        )}
-      </div>
+      <p className="col-start-2 font-semibold text-navy tabular-nums sm:col-start-3 sm:text-right">
+        {formatPrice(line.price * line.quantity)}
+      </p>
     </li>
   );
 }

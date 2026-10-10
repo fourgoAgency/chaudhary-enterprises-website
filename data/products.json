@@ -3,19 +3,44 @@
     {
       "name": "Grocery & Gourmet Food",
       "slug": "grocery-gourmet-food",
-      "description": "Pantry staples, teas, sauces and specialty foods supplied in bulk."
+      "description": "Teas, superfood powders and specialty pantry favourites."
     },
     {
       "name": "Tools & Home Improvement",
       "slug": "tools-home-improvement",
-      "description": "Professional tools and building supplies for contractors and retailers."
+      "description": "Quality tools for home projects and the trade."
+    },
+    {
+      "name": "Sports & Outdoors",
+      "slug": "sports-outdoors",
+      "description": "Gear for training, sport and life on the water."
+    },
+    {
+      "name": "Health & Household",
+      "slug": "health-household",
+      "description": "Everyday wellness, relaxation and self-care essentials."
+    },
+    {
+      "name": "Beauty & Personal Care",
+      "slug": "beauty-personal-care",
+      "description": "Hair, lash and skin care from trusted brands."
+    },
+    {
+      "name": "Electronics",
+      "slug": "electronics",
+      "description": "Portable audio, power and smart home accessories."
+    },
+    {
+      "name": "Musical Instruments",
+      "slug": "musical-instruments",
+      "description": "Power supplies and gear for guitarists and musicians."
     }
   ],
   "products": [
     {
       "id": "CE-GF-001",
       "sku": "CE-GF-001",
-      "slug": "green-foods-organic-ceremonial-grade-matcha-green-tea-11-oz",
+      "slug": "green-foods-ceremonial-grade-matcha-green-tea-energy-blend-11-oz",
       "upc": "083851209228",
       "name": "Ceremonial Grade Matcha Green Tea Energy Blend, 11 oz",
       "brand": "Green Foods",
@@ -33,129 +58,60 @@
         "Form": "Powder",
         "Container": "Canister"
       },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
+      "price": 23.47,
       "currency": "USD",
-      "priceTiers": [
-        {
-          "minQty": 1,
-          "maxQty": 47,
-          "unitPrice": 19.1
-        },
-        {
-          "minQty": 48,
-          "maxQty": 143,
-          "unitPrice": 17.93
-        },
-        {
-          "minQty": 144,
-          "maxQty": null,
-          "unitPrice": 16.9
-        }
-      ],
-      "images": [
-        "/products/green-foods-organic-ceremonial-grade-matcha-green-tea-11-oz-1.jpg"
-      ],
+      "stockStatus": "in_stock",
+      "images": ["/products/green-foods-ceremonial-grade-matcha-green-tea-energy-blend-11-oz-1.jpg"],
       "featured": true
     },
     {
       "id": "CE-GF-002",
       "sku": "CE-GF-002",
-      "slug": "green-foods-organic-matcha-green-tea-5-5-oz",
+      "slug": "green-foods-ceremonial-grade-matcha-green-tea-energy-blend-5-5-oz",
       "upc": "083851209006",
       "name": "Ceremonial Grade Matcha Green Tea Energy Blend, 5.5 oz",
       "brand": "Green Foods",
       "category": "Grocery & Gourmet Food",
       "categorySlug": "grocery-gourmet-food",
       "description": "USDA Organic ceremonial grade matcha green tea energy blend in a 5.5 oz (156 g) canister. Dissolves easily in hot or cold water.",
-      "highlights": [
-        "Ceremonial grade",
-        "USDA Organic",
-        "Dissolves easily in hot or cold water",
-        "Farm-direct, whole-leaf and shade-grown (per manufacturer)"
-      ],
+      "highlights": ["Ceremonial grade", "USDA Organic", "Dissolves easily in hot or cold water"],
       "specifications": {
         "Net weight": "5.5 oz (156 g)",
         "Form": "Powder",
         "Container": "Canister"
       },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
+      "price": 14.99,
       "currency": "USD",
-      "priceTiers": [
-        {
-          "minQty": 1,
-          "maxQty": 47,
-          "unitPrice": 10.91
-        },
-        {
-          "minQty": 48,
-          "maxQty": 143,
-          "unitPrice": 10.24
-        },
-        {
-          "minQty": 144,
-          "maxQty": null,
-          "unitPrice": 9.65
-        }
-      ],
-      "images": [
-        "/products/green-foods-organic-matcha-green-tea-5-5-oz-1.jpg"
-      ],
+      "stockStatus": "in_stock",
+      "images": ["/products/green-foods-ceremonial-grade-matcha-green-tea-energy-blend-5-5-oz-1.jpg"],
       "featured": false
     },
     {
       "id": "CE-GF-003",
       "sku": "CE-GF-003",
-      "slug": "green-foods-organic-wheat-grass-shots-10-6-oz",
+      "slug": "green-foods-organic-raw-wheat-grass-shots-10-6-oz",
       "upc": "083851203448",
       "name": "Organic & Raw Wheat Grass Shots, 10.6 oz",
       "brand": "Green Foods",
       "category": "Grocery & Gourmet Food",
       "categorySlug": "grocery-gourmet-food",
       "description": "Organic and raw wheat grass juice powder in a 10.6 oz (300 g) canister, for quick shots or mixing into juices and smoothies.",
-      "highlights": [
-        "USDA Organic",
-        "Organic, vegan, gluten-free, non-GMO (per label)",
-        "10.6 oz (300 g) canister"
-      ],
+      "highlights": ["USDA Organic", "Organic, vegan, gluten-free, non-GMO (per label)", "10.6 oz (300 g) canister"],
       "specifications": {
         "Net weight": "10.6 oz (300 g)",
         "Form": "Juice powder",
         "Container": "Canister"
       },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
+      "price": 25.99,
       "currency": "USD",
-      "priceTiers": [
-        {
-          "minQty": 1,
-          "maxQty": 47,
-          "unitPrice": 21.83
-        },
-        {
-          "minQty": 48,
-          "maxQty": 143,
-          "unitPrice": 20.49
-        },
-        {
-          "minQty": 144,
-          "maxQty": null,
-          "unitPrice": 19.31
-        }
-      ],
-      "images": [
-        "/products/green-foods-organic-wheat-grass-shots-10-6-oz-1.jpg"
-      ],
+      "stockStatus": "in_stock",
+      "images": ["/products/green-foods-organic-raw-wheat-grass-shots-10-6-oz-1.jpg"],
       "featured": false
     },
     {
       "id": "CE-TH-001",
       "sku": "CE-TH-001",
-      "slug": "delko-drywall-taping-tool-with-inside-corner-applicator-dtah1",
+      "slug": "delko-tools-drywall-taping-tool-with-inside-corner-applicator-attachment-dtah1",
       "upc": null,
       "name": "Drywall Taping Tool with Inside Corner Applicator Attachment (DTAH1)",
       "brand": "Delko Tools",
@@ -165,39 +121,441 @@
       "highlights": [
         "Applies both compound and paper tape (per manufacturer)",
         "Includes inside corner applicator attachment",
-        "Improved handle construction and control knob",
         "Spare control knob included"
       ],
       "specifications": {
         "Model": "DTAH1",
-        "Shipping weight": "2.7 lb",
-        "Pack": "1 unit"
+        "Shipping weight": "2.7 lb"
       },
-      "casePack": 1,
-      "moq": 5,
-      "stockStatus": "in_stock",
+      "price": 59.99,
       "currency": "USD",
-      "priceTiers": [
-        {
-          "minQty": 1,
-          "maxQty": 47,
-          "unitPrice": 42.18
-        },
-        {
-          "minQty": 48,
-          "maxQty": 143,
-          "unitPrice": 39.58
-        },
-        {
-          "minQty": 144,
-          "maxQty": null,
-          "unitPrice": 37.31
-        }
-      ],
-      "images": [
-        "/products/delko-drywall-taping-tool-with-inside-corner-applicator-dtah1-1.jpg"
-      ],
+      "stockStatus": "in_stock",
+      "images": ["/products/delko-tools-drywall-taping-tool-with-inside-corner-applicator-attachment-dtah1-1.jpg"],
       "featured": true
+    },
+    {
+      "id": "CE-SO-001",
+      "sku": "CE-SO-001",
+      "slug": "forcefield-ultra-pro-headband-black",
+      "upc": "819126023097",
+      "name": "Ultra Pro Headband, Black",
+      "brand": "ForceField",
+      "category": "Sports & Outdoors",
+      "categorySlug": "sports-outdoors",
+      "description": "A wide, soft-fit black headband from ForceField for training, running and sport.",
+      "highlights": ["Wide, comfortable fit", "Black", "Ultra Pro design"],
+      "specifications": {
+        "Colour": "Black"
+      },
+      "price": 30.0,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/forcefield-ultra-pro-headband-black-1.jpg"],
+      "featured": true
+    },
+    {
+      "id": "CE-SO-002",
+      "sku": "CE-SO-002",
+      "slug": "forcefield-ultra-headband-black-ffult-b",
+      "upc": "859780003141",
+      "name": "Ultra Headband, Black (FFULT-B)",
+      "brand": "ForceField",
+      "category": "Sports & Outdoors",
+      "categorySlug": "sports-outdoors",
+      "description": "ForceField's Ultra headband in black, with a wide band that stays in place during activity.",
+      "highlights": ["Wide band", "Black", "Model FFULT-B"],
+      "specifications": {
+        "Model": "FFULT-B",
+        "Colour": "Black"
+      },
+      "price": 26.26,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/forcefield-ultra-headband-black-ffult-b-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-SO-003",
+      "sku": "CE-SO-003",
+      "slug": "nautilus-lifeline-marine-rescue-gps-nexgen",
+      "upc": null,
+      "name": "Marine Rescue GPS nexGen",
+      "brand": "Nautilus Lifeline",
+      "category": "Sports & Outdoors",
+      "categorySlug": "sports-outdoors",
+      "description": "A compact, high-visibility marine rescue GPS unit for boaters, divers and paddlers, with a clip for attaching to a life jacket or gear.",
+      "highlights": ["Marine rescue GPS", "High-visibility orange housing", "Clip for life jacket or gear"],
+      "specifications": {
+        "Model": "nexGen",
+        "Colour": "Orange"
+      },
+      "price": 199.0,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/nautilus-lifeline-marine-rescue-gps-nexgen-1.jpg"],
+      "featured": true
+    },
+    {
+      "id": "CE-HH-001",
+      "sku": "CE-HH-001",
+      "slug": "dry-eye-heated-eye-mask-with-digital-controller",
+      "upc": "850002308211",
+      "name": "Heated Eye Mask with Digital Controller",
+      "brand": "Dry Eye",
+      "category": "Health & Household",
+      "categorySlug": "health-household",
+      "description": "A soft, adjustable heated eye mask with a handheld digital controller, for relaxing warmth around the eyes at home.",
+      "highlights": ["Adjustable strap", "Handheld digital controller with display", "Soft fabric mask"],
+      "specifications": {
+        "Type": "Heated eye mask"
+      },
+      "price": 89.5,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/dry-eye-heated-eye-mask-with-digital-controller-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-HH-002",
+      "sku": "CE-HH-002",
+      "slug": "soothing-touch-basics-massage-cream-unscented-1-gallon",
+      "upc": "714905081421",
+      "name": "Basics Massage Cream, Unscented, 1 Gallon",
+      "brand": "Soothing Touch",
+      "category": "Health & Household",
+      "categorySlug": "health-household",
+      "description": "Unscented, paraben-free massage cream in a 1 gallon tub, suited to massage therapists and spas.",
+      "highlights": ["Unscented", "Paraben-free (per label)", "1 gallon tub"],
+      "specifications": {
+        "Size": "1 gallon",
+        "Scent": "Unscented",
+        "Model": "13-3224"
+      },
+      "price": 35.0,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/soothing-touch-basics-massage-cream-unscented-1-gallon-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-BP-001",
+      "sku": "CE-BP-001",
+      "slug": "nanolash-eyelash-serum-3-ml",
+      "upc": "5905669547000",
+      "name": "Eyelash Serum, 3 ml",
+      "brand": "Nanolash",
+      "category": "Beauty & Personal Care",
+      "categorySlug": "beauty-personal-care",
+      "description": "Nanolash eyelash serum in a 3 ml (0.1 fl oz) tube with a fine applicator brush.",
+      "highlights": ["Fine applicator brush", "3 ml (0.1 fl oz)"],
+      "specifications": {
+        "Volume": "3 ml (0.1 fl oz)"
+      },
+      "price": 50.75,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/nanolash-eyelash-serum-3-ml-1.jpg"],
+      "featured": true
+    },
+    {
+      "id": "CE-BP-002",
+      "sku": "CE-BP-002",
+      "slug": "kerotin-extensive-thickening-treatment-4-fl-oz",
+      "upc": "611851704322",
+      "name": "Extensive Thickening Treatment, 4 fl oz",
+      "brand": "Kerotin",
+      "category": "Beauty & Personal Care",
+      "categorySlug": "beauty-personal-care",
+      "description": "A leave-in hair thickening treatment spray in a 4 fl oz (118 ml) bottle, made with natural ingredients (per label).",
+      "highlights": [
+        "No added silicones, sulfates, sodium chloride, parabens or phthalates (per label)",
+        "Spray bottle",
+        "4 fl oz (118 ml)"
+      ],
+      "specifications": {
+        "Volume": "4 fl oz (118 ml)",
+        "Form": "Spray"
+      },
+      "price": 32.99,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/kerotin-extensive-thickening-treatment-4-fl-oz-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-BP-003",
+      "sku": "CE-BP-003",
+      "slug": "jellua-professional-squidink-active-shampoo-repair-treatment-cream-set",
+      "upc": "885278721334",
+      "name": "Professional Squidink Active Shampoo & Repair Treatment Cream Set",
+      "brand": "Jellua",
+      "category": "Beauty & Personal Care",
+      "categorySlug": "beauty-personal-care",
+      "description": "A two-piece Jellua Professional Squidink set: Active Shampoo and Repair Treatment Cream, 8 oz each.",
+      "highlights": ["Shampoo and treatment cream set", "8 oz each"],
+      "specifications": {
+        "Contents": "Shampoo 8 oz + Treatment cream 8 oz"
+      },
+      "price": 38.9,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/jellua-professional-squidink-active-shampoo-repair-treatment-cream-set-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-BP-004",
+      "sku": "CE-BP-004",
+      "slug": "walker-tape-ultra-hold-contour-tape-strips",
+      "upc": "856459002689",
+      "name": "Ultra Hold Contour Tape Strips",
+      "brand": "Walker Tape",
+      "category": "Beauty & Personal Care",
+      "categorySlug": "beauty-personal-care",
+      "description": "Walker Tape Ultra Hold pre-cut contour tape strips for hair systems and wigs.",
+      "highlights": ["Ultra Hold adhesive", "Pre-cut contour shape"],
+      "specifications": {
+        "Shape": "Contour"
+      },
+      "price": 8.99,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/walker-tape-ultra-hold-contour-tape-strips-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-BP-005",
+      "sku": "CE-BP-005",
+      "slug": "hairmd-professional-clinical-hair-repair-shampoo-150-ml",
+      "upc": "8681749199532",
+      "name": "Professional Clinical Hair Repair Shampoo, 150 ml",
+      "brand": "HairMD",
+      "category": "Beauty & Personal Care",
+      "categorySlug": "beauty-personal-care",
+      "description": "HairMD Professional Clinical Hair Repair Shampoo in a 150 ml (5.07 fl oz) bottle.",
+      "highlights": ["Clinical hair repair formula", "150 ml (5.07 fl oz)"],
+      "specifications": {
+        "Volume": "150 ml (5.07 fl oz)"
+      },
+      "price": 45.99,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/hairmd-professional-clinical-hair-repair-shampoo-150-ml-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-EL-001",
+      "sku": "CE-EL-001",
+      "slug": "cioks-dc7-pedalboard-power-supply-7-outputs",
+      "upc": "669014297631",
+      "name": "DC7 Pedalboard Power Supply, 7 Outputs",
+      "brand": "CIOKS",
+      "category": "Electronics",
+      "categorySlug": "electronics",
+      "description": "The CIOKS DC7 compact power supply with seven outputs and a USB port, for powering guitar effects pedals.",
+      "highlights": ["7 DC outputs", "USB output", "Compact, low-profile housing"],
+      "specifications": {
+        "Model": "DC7",
+        "Outputs": "7 + USB"
+      },
+      "price": 276.19,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/cioks-dc7-pedalboard-power-supply-7-outputs-1.jpg"],
+      "featured": true
+    },
+    {
+      "id": "CE-EL-002",
+      "sku": "CE-EL-002",
+      "slug": "surfans-f20-hi-res-digital-music-player",
+      "upc": null,
+      "name": "F20 Hi-Res Digital Music Player",
+      "brand": "Surfans",
+      "category": "Electronics",
+      "categorySlug": "electronics",
+      "description": "A portable hi-res digital music player with a colour screen, physical control buttons and headphone outputs.",
+      "highlights": ["Colour display", "Physical playback controls", "Headphone outputs"],
+      "specifications": {
+        "Model": "F20"
+      },
+      "price": 123.99,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/surfans-f20-hi-res-digital-music-player-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-EL-003",
+      "sku": "CE-EL-003",
+      "slug": "surfans-f28-hi-res-touchscreen-music-player",
+      "upc": null,
+      "name": "F28 Hi-Res Touchscreen Music Player",
+      "brand": "Surfans",
+      "category": "Electronics",
+      "categorySlug": "electronics",
+      "description": "A slim hi-res music player with a full touchscreen, Bluetooth and side playback controls.",
+      "highlights": ["Touchscreen", "Bluetooth", "Side playback buttons"],
+      "specifications": {
+        "Model": "F28"
+      },
+      "price": 159.19,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/surfans-f28-hi-res-touchscreen-music-player-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-EL-004",
+      "sku": "CE-EL-004",
+      "slug": "accu-shot-bt12-qk-mounting-hardware-set",
+      "upc": "810040220043",
+      "name": "BT12-QK Mounting Hardware Set",
+      "brand": "Accu Shot",
+      "category": "Electronics",
+      "categorySlug": "electronics",
+      "description": "Accu Shot BT12-QK mounting hardware set, including mounting nuts and clips.",
+      "highlights": ["Mounting nuts and clips included", "Black finish"],
+      "specifications": {
+        "Model": "BT12-QK"
+      },
+      "price": 104.95,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/accu-shot-bt12-qk-mounting-hardware-set-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-EL-005",
+      "sku": "CE-EL-005",
+      "slug": "crittercord-cord-protector-10-feet",
+      "upc": "740023528005",
+      "name": "Cord Protector, 10 Feet",
+      "brand": "CritterCord",
+      "category": "Electronics",
+      "categorySlug": "electronics",
+      "description": "A 10 ft cord protector infused with citrus scent and bitter taste deterrents to discourage pets from chewing on cords.",
+      "highlights": [
+        "Citrus scent and bitter taste deterrents",
+        "Fits most insulated cords up to 14 gauge",
+        "For lamp, extension and audio/video cords"
+      ],
+      "specifications": {
+        "Length": "10 ft",
+        "Model": "CC10"
+      },
+      "price": 16.49,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/crittercord-cord-protector-10-feet-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-MI-001",
+      "sku": "CE-MI-001",
+      "slug": "cioks-sol-pedalboard-power-supply-5-outputs",
+      "upc": "669014297730",
+      "name": "SOL Pedalboard Power Supply, 5 Outputs",
+      "brand": "CIOKS",
+      "category": "Musical Instruments",
+      "categorySlug": "musical-instruments",
+      "description": "The CIOKS SOL power supply with five outputs and selectable 9, 12, 15 and 18 V DC settings, for guitar effects pedals.",
+      "highlights": ["5 outputs", "Selectable 9 / 12 / 15 / 18 V DC", "Compact housing"],
+      "specifications": {
+        "Model": "SOL",
+        "Outputs": "5"
+      },
+      "price": 214.0,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/cioks-sol-pedalboard-power-supply-5-outputs-1.jpg"],
+      "featured": true
+    },
+    {
+      "id": "CE-SO-004",
+      "sku": "CE-SO-004",
+      "slug": "forcefield-ultra-headband-red-ffult-rd",
+      "upc": "819126020010",
+      "name": "Ultra Headband, Red (FFULT-RD)",
+      "brand": "ForceField",
+      "category": "Sports & Outdoors",
+      "categorySlug": "sports-outdoors",
+      "description": "ForceField's Ultra headband in red, with a wide band that stays in place during activity.",
+      "highlights": ["Wide band", "Red", "Model FFULT-RD"],
+      "specifications": {
+        "Model": "FFULT-RD",
+        "Colour": "Red"
+      },
+      "price": 23.98,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/forcefield-ultra-headband-red-ffult-rd-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-HH-003",
+      "sku": "CE-HH-003",
+      "slug": "stacker-2-b12-energy-shot-acai-pomegranate-2-fl-oz-bottles",
+      "upc": "358286941006",
+      "name": "B12 Energy Shot, Acai Pomegranate, 2 fl oz Bottles",
+      "brand": "Stacker 2",
+      "category": "Health & Household",
+      "categorySlug": "health-household",
+      "description": "Stacker 2 B12 energy shots in acai pomegranate flavour, in 2 fl oz (60 ml) bottles.",
+      "highlights": ["Acai pomegranate flavour", "0 calories and 0 sugar (per label)", "2 fl oz (60 ml) bottles"],
+      "specifications": {
+        "Bottle size": "2 fl oz (60 ml)",
+        "Flavour": "Acai Pomegranate"
+      },
+      "price": 19.5,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/stacker-2-b12-energy-shot-acai-pomegranate-2-fl-oz-bottles-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-HH-004",
+      "sku": "CE-HH-004",
+      "slug": "soothing-touch-ayurveda-original-versa-cr-me-1-gallon",
+      "upc": "897799001000",
+      "name": "Ayurveda Original Versa Crème, 1 Gallon",
+      "brand": "Soothing Touch",
+      "category": "Health & Household",
+      "categorySlug": "health-household",
+      "description": "Soothing Touch Ayurveda Original Versa Crème, a multi-purpose massage crème in a 128 fl oz (1 gallon, 3.8 L) tub.",
+      "highlights": ["Multi-purpose massage crème", "Herbal therapy Ayurveda line", "128 fl oz (1 gallon, 3.8 L)"],
+      "specifications": {
+        "Size": "128 fl oz (3.8 L)",
+        "Model": "450128-07"
+      },
+      "price": 41.92,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/soothing-touch-ayurveda-original-versa-cr-me-1-gallon-1.jpg"],
+      "featured": false
+    },
+    {
+      "id": "CE-MI-002",
+      "sku": "CE-MI-002",
+      "slug": "cioks-4-pedalboard-power-supply-4-outputs-c4e",
+      "upc": "669014297594",
+      "name": "4 Pedalboard Power Supply, 4 Outputs (C4E)",
+      "brand": "CIOKS",
+      "category": "Musical Instruments",
+      "categorySlug": "musical-instruments",
+      "description": "The CIOKS 4 compact power supply with four outputs, for guitar effects pedals. Accepts 5 V USB-C, 9–24 V DC or 9–12 V AC input.",
+      "highlights": [
+        "4 outputs with individual settings",
+        "Input: 5 V USB-C, 9–24 V DC or 9–12 V AC",
+        "Compact housing"
+      ],
+      "specifications": {
+        "Model": "C4E",
+        "Outputs": "4"
+      },
+      "price": 170.0,
+      "currency": "USD",
+      "stockStatus": "in_stock",
+      "images": ["/products/cioks-4-pedalboard-power-supply-4-outputs-c4e-1.jpg"],
+      "featured": false
     }
   ]
 }

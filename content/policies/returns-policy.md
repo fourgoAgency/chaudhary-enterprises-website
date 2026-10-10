@@ -3,7 +3,7 @@ title: Returns & Refund Policy
 effectiveDate: "[Month Day, Year]"
 ---
 
-Because we sell at wholesale, all sales are final except in the cases below. This policy explains when we accept returns, how to request one, and how refunds work.
+All sales are final except in the cases below. This policy explains when we accept returns, how to request one, and how refunds work.
 
 ### 1. Damaged, defective, or incorrect items
 
@@ -17,13 +17,13 @@ Once we confirm the issue, we will replace the items or refund them, at our choi
 
 ### 2. Shortages
 
-If your delivery is missing items, report it within [48 hours] of delivery. For freight orders, the shortage must be noted on the delivery receipt when you sign for it.
+If your delivery is missing items, report it within [48 hours] of delivery.
 
 ### 3. Returns for other reasons
 
 Returns of correctly shipped, undamaged products (for example, ordering too many or changing your mind) are accepted only with our written approval and only within [14] days of delivery. If approved:
 
-- Items must be unopened, unused, and in their original, resaleable packaging and case packs.
+- Items must be unopened, unused, and in their original, resaleable packaging.
 - You pay return shipping.
 - A restocking fee of [15]% of the item value applies.
 
@@ -35,7 +35,6 @@ For safety and hygiene reasons, the following cannot be returned unless they arr
 - Dietary supplements, health, and personal care products.
 - Beauty and cosmetic products.
 - Any item that has been opened, used, relabelled, or had its packaging altered.
-- Products that have been sent to a third-party warehouse or fulfilment center.
 - Clearance or specially ordered items marked as final sale.
 
 ### 5. How to request a return

@@ -16,9 +16,7 @@ export async function getLiveCartProducts(slugs: unknown): Promise<LiveCartProdu
     sku: p.sku,
     name: p.name,
     image: p.images[0].src,
-    moq: p.moq,
-    casePack: p.casePack,
-    tiers: p.tiers,
+    price: p.price,
     stock: p.stock,
   }));
 }

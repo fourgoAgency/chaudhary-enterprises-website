@@ -9,9 +9,9 @@ Chaudhary Enterprises LLC ("we", "us", "our") operates chaudharyenterprisesllc.c
 
 **Information you give us**
 
-- **Account details:** name, company name, business type, email address, phone number, password, and optional tax ID such as an EIN or resale certificate number. Your account is saved in your own browser on your device; we receive these details only when you send us an order or a quote request.
-- **Order details:** billing and shipping addresses, products ordered, quantities, and order notes such as fulfilment-center delivery instructions.
-- **Quote requests and messages:** anything you send us through bulk-quote forms or by email or phone.
+- **Account details:** name, email address, phone number, and password. Your account is saved in your own browser on your device; we receive these details only when you send us an order.
+- **Order details:** shipping address, products ordered, quantities, and order notes.
+- **Messages:** anything you send us by email or phone.
 
 **Information collected automatically**
 
@@ -20,9 +20,9 @@ Chaudhary Enterprises LLC ("we", "us", "our") operates chaudharyenterprisesllc.c
 
 ### 2. How we use your information
 
-- To create and manage your business account.
-- To process, ship, and invoice your orders, and to apply wholesale pricing and tax exemptions where valid.
-- To respond to quote requests, questions, and support messages.
+- To create and manage your account.
+- To process, ship, and invoice your orders.
+- To respond to questions and support messages.
 - To send order confirmations and shipping updates.
 - To prevent fraud, protect the Site, and meet our legal and tax obligations.
 
@@ -43,7 +43,7 @@ We use essential cookies and local browser storage to keep you signed in, save y
 
 ### 5. How long we keep your information
 
-Account details, your cart, wishlist and order history saved in your browser stay on your device until you delete them or clear your browser data. We keep the orders, quote requests and invoice records you send us for as long as tax and accounting laws require, typically up to seven years. We delete or anonymise information we no longer need.
+Account details, your cart, wishlist and order history saved in your browser stay on your device until you delete them or clear your browser data. We keep the orders, messages and invoice records you send us for as long as tax and accounting laws require, typically up to seven years. We delete or anonymise information we no longer need.
 
 ### 6. Your rights
 
@@ -61,7 +61,7 @@ We use HTTPS encryption to protect information you send us, and passwords saved 
 
 ### 8. Children
 
-The Site is for businesses only and is not directed to anyone under 18. We do not knowingly collect information from children.
+The Site is not directed to anyone under 18. We do not knowingly collect information from children.
 
 ### 9. Changes to this policy
 

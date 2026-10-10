@@ -1,43 +1,36 @@
-// Client-supplied copy. Keep wording as provided.
+// Home-page copy for the store. Edit freely.
 
 export const aboutParagraphs = [
-  "Chaudhary Enterprises LLC is a wholesale distribution company based in Sheridan, Wyoming, dedicated to connecting trusted brands with retailers and online sellers across the United States. We source genuine, brand-new products and supply them in bulk, across categories including health and household, beauty and personal care, grocery and gourmet food, kitchen and dining, tools and home improvement, automotive, industrial and scientific, sports and outdoors, and electronics.",
-  "We work to build long-term partnerships with manufacturers and brands. Every product we offer is sourced through legitimate supply channels, stored and handled with care, and delivered in its original condition and packaging. We respect each brand's identity, pricing policies, and presentation standards, because a brand's reputation is something we're trusted to protect.",
-  "Our customers choose us for consistent availability, competitive wholesale pricing, and reliable order fulfilment. Whether a business needs a single case or a large recurring order, our team handles each order with clear communication, accurate invoicing, and dependable delivery timelines.",
+  "Chaudhary Enterprises LLC is an online store based in Sheridan, Wyoming. We sell genuine, brand-new products across everyday categories, from teas and pantry favorites to tools for the home, and ship them to customers across the United States.",
+  "Everything we sell comes from legitimate supply channels and arrives in its original packaging. We check each order before it ships and pack it with care, so what you receive is exactly what you ordered.",
+  "Ordering is simple. Add products to your cart and send us your order. We confirm availability, shipping and your total by email before anything is charged, and our team is a phone call or an email away if you have questions.",
 ];
 
 export const mission =
-  "To be a reliable link between quality brands and the retailers who sell them, built on authenticity, transparency, and long-term partnership.";
+  "To make it easy to buy genuine products online, with honest prices and service you can rely on.";
 
 export const reasons = [
   {
-    title: "Authentic products only",
-    body: "Everything is sourced through legitimate supply channels and shipped new, in original packaging.",
+    title: "Genuine products",
+    body: "Brand-new items from legitimate supply channels, in their original packaging.",
   },
   {
-    title: "Brand-first approach",
-    body: "We respect MAP and presentation policies, so your listings stay in good standing with the brands you carry.",
+    title: "Confirmed before you pay",
+    body: "We email you to confirm stock, shipping and your total before any payment is taken.",
   },
   {
-    title: "Bulk-ready supply with tiered pricing",
-    body: "Unit prices drop at set quantities, from a single case to pallet-size orders.",
+    title: "Shipping across the US",
+    body: "Orders are packed with care and shipped with tracking to your door.",
   },
   {
-    title: "Reliable fulfilment",
-    body: "Orders are handled with care and shipped on dependable timelines, including to Amazon FBA.",
-  },
-  {
-    title: "Clear communication",
-    body: "Accurate invoicing and a real person to talk to about every order.",
+    title: "Real people to help",
+    body: "Call or email us and a member of our team will help with your order.",
   },
 ];
 
 export const orderSteps = [
-  { title: "Browse", body: "Find products by category, SKU or UPC and compare tier prices." },
-  { title: "Add bulk quantities", body: "Order in whole cases from the minimum order quantity upwards." },
-  {
-    title: "Send your order",
-    body: "Submit your order with business and FBA prep details. We confirm stock, shipping and invoice by email.",
-  },
-  { title: "Ship to FBA", body: "We ship to your warehouse or straight to an Amazon fulfilment centre." },
+  { title: "Add to cart", body: "Choose your products and quantities." },
+  { title: "Send your order", body: "Enter your contact and delivery details. No payment is taken online." },
+  { title: "We confirm by email", body: "We confirm availability, shipping and your total, with payment details." },
+  { title: "Delivered to you", body: "Your order ships with tracking to your address." },
 ];

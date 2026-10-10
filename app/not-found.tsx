@@ -13,8 +13,8 @@ export default function NotFound() {
       <p className="text-sm text-muted">Error 404</p>
       <h1 className="section-title mt-2">Page not found</h1>
       <p className="mt-6 max-w-md text-muted">
-        The page you&apos;re looking for has moved or no longer exists. Browse our wholesale range or head back to the
-        home page.
+        The page you&apos;re looking for has moved or no longer exists. Browse our products or head back to the home
+        page.
       </p>
       <div className="mt-10 flex flex-wrap justify-center gap-4">
         <Button asChild>
