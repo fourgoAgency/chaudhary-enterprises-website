@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { cacheLife } from "next/cache";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Building2, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, PaymentBadges } from "@/components/brand/icons";
 import { NewsletterForm } from "@/components/newsletter-form";
-import { mainNav, serviceNav, site } from "@/lib/site";
+import { formattedAddress, quickLinks, routes, serviceNav, site } from "@/lib/site";
 
 async function CopyrightYear() {
   "use cache";
@@ -22,7 +22,7 @@ const socials = [
   { label: "LinkedIn", href: site.social.linkedin, Icon: LinkedinIcon },
   { label: "Instagram", href: site.social.instagram, Icon: InstagramIcon },
   { label: "Facebook", href: site.social.facebook, Icon: FacebookIcon },
-];
+].filter((s) => s.href);
 
 export function Footer() {
   return (
@@ -30,46 +30,42 @@ export function Footer() {
       <div className="h-px bg-linear-to-r from-transparent via-gold to-transparent" />
       <div className="container-site grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.5fr]">
         <div>
-          <Link href="/" aria-label={`${site.name} — home`} className="inline-block">
+          <Link href={routes.home} aria-label={`${site.name} — home`} className="inline-block">
             <Logo tone="dark" className="w-60" />
           </Link>
           <p className="mt-6 max-w-xs text-sm leading-relaxed text-ivory">
-            {/* TODO: client copy */}
-            Trusted wholesale supply for Amazon sellers and Amazon Business buyers — tiered bulk pricing, fast dispatch
-            and FBA-ready stock.
+            {site.tagline}. Genuine, brand-new products supplied in bulk to Amazon sellers, retailers and online sellers
+            across the United States.
           </p>
-          <ul className="mt-6 flex gap-3" aria-label="Social media">
-            {socials.map(({ label, href, Icon }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${label} (opens in a new tab)`}
-                  className="inline-flex size-9 items-center justify-center border border-ivory/25 text-ivory transition-colors hover:border-gold hover:text-gold-light"
-                >
-                  <Icon className="size-4" />
-                </a>
-              </li>
-            ))}
-          </ul>
+          {socials.length > 0 && (
+            <ul className="mt-6 flex gap-3" aria-label="Social media">
+              {socials.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${label} (opens in a new tab)`}
+                    className="inline-flex size-9 items-center justify-center border border-ivory/25 text-ivory transition-colors hover:border-gold hover:text-gold-light"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <nav aria-label="Quick links">
           <FooterHeading>Quick links</FooterHeading>
           <ul className="space-y-3">
-            {mainNav.map((item) => (
+            {quickLinks.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className={linkClass}>
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="/cart" className={linkClass}>
-                Cart
-              </Link>
-            </li>
           </ul>
         </nav>
 
@@ -89,22 +85,22 @@ export function Footer() {
         <div>
           <FooterHeading>Contact</FooterHeading>
           <address className="space-y-3 text-sm not-italic">
-            <a href={`mailto:${site.contact.email}`} className={`flex items-start gap-3 ${linkClass}`}>
-              <Mail className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
-              {site.contact.email}
-            </a>
+            <p className="flex items-start gap-3">
+              <Building2 className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
+              <span className="font-semibold">{site.name}</span>
+            </p>
+            <p className="flex items-start gap-3">
+              <MapPin className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
+              <span>{formattedAddress}</span>
+            </p>
             <a href={site.contact.phoneHref} className={`flex items-start gap-3 ${linkClass}`}>
               <Phone className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
               {site.contact.phone}
             </a>
-            <p className="flex items-start gap-3">
-              <MapPin className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
-              <span>{site.contact.address.slice(1).join(", ")}</span>
-            </p>
-            <p className="flex items-start gap-3">
-              <Clock className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
-              <span>{site.contact.hours.map((h) => `${h.days}: ${h.time}`).join(" · ")}</span>
-            </p>
+            <a href={`mailto:${site.contact.email}`} className={`flex items-start gap-3 break-all ${linkClass}`}>
+              <Mail className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
+              {site.contact.email}
+            </a>
           </address>
 
           <div className="mt-8">

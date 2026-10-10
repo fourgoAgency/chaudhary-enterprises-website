@@ -63,7 +63,7 @@ How we use the colours:
 - A thin promo **top bar** carries a contact message and social icons.
 - The **main row** has the logo on the left, the uppercase nav, and search/wishlist/cart icons with counts on the right.
 - The header is **sticky** with a shadow.
-- On mobile: burger on the left, logo in the centre, cart on the right.
+- On mobile: burger on the left, logo in the centre, wishlist and cart on the right.
 - BB Sports adds a utility row (login / contact / phone) and a nav bar that also sticks.
 
 **Ours:**
@@ -73,11 +73,11 @@ How we use the colours:
   - Right: email/phone on desktop.
 - **Main row** (ivory-light, about 80px desktop / 64px mobile):
   - Full logo on the left.
-  - Centred nav: Home, Shop, About, Contact.
-  - Right: search, then cart with a count badge.
+  - Centred nav: Home, Shop, and a categories mega-menu. There are no About or Contact pages: About is a home-page section (`/#about`) and contact details live in the footer.
+  - Right: search, account icon, wishlist heart and cart, each with a count badge where relevant.
   - A gold hairline sits under the header.
 - **Sticky:** the main row sticks and gains a soft shadow once scrolled. The top bar scrolls away.
-- **Mobile:** burger on the left, the **CE monogram** in the centre, cart on the right. The burger opens a left drawer with nav links, search and contact details.
+- **Mobile:** burger on the left, the **CE monogram** in the centre, wishlist and cart on the right. The burger opens a left drawer with nav links, search and contact details.
 
 ## 4. Hero style
 
@@ -111,11 +111,11 @@ How we use the colours:
 2. Optional badge, top-left (e.g. "Bestseller", "Low stock").
 3. Category / brand eyebrow (11px uppercase, muted).
 4. Title (Cormorant, 2-line clamp).
-5. **"From £X / unit"**, which is the lowest tier price.
+5. **"From $X / unit"**, which is the lowest tier price.
 6. **"MOQ: N · Case of M"** in small muted text.
 7. A full-width "View product" / "Add to cart" button.
 
-There is no quick view or wishlist. That keeps the scope tight and the cards calm.
+A wishlist heart sits top-right on the image. There is no quick view, which keeps the cards calm.
 
 ## 6. Collection grid + filter placement
 
@@ -182,7 +182,7 @@ There is no quick view or wishlist. That keeps the scope tight and the cards cal
 
 - **Row 1** (four columns on desktop, stacked on mobile):
   1. Logo (dark variant), a short description, social icons.
-  2. Quick links: Shop, About, Contact, categories.
-  3. Customer service: Shipping & Returns, Privacy, Terms, FAQ (`/contact#faq`).
-  4. Contact details (email, phone, address, hours), then the newsletter signup.
+  2. Quick links: Shop, About us (`/#about`), Wishlist, My Account, Cart.
+  3. Customer service: Shipping & Returns, Privacy, Terms.
+  4. Contact details (legal name, full address, phone, email — always visible), then the newsletter signup.
 - **Row 2:** payment icons (Visa, Mastercard, Amex, Apple Pay, Google Pay; Stripe-supported), then "© {year} Chaudhary Enterprises LLC. All rights reserved."

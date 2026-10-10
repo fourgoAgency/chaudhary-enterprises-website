@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
+import { Heart, Mail, Phone, ShoppingBag, UserRound } from "lucide-react";
 import { Logo, LogoMark } from "@/components/brand/logo";
-import { CartLink } from "@/components/layout/cart-link";
+import { HeaderIconLink } from "@/components/layout/header-icon-link";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { NavLinks } from "@/components/layout/nav-links";
 import { SearchForm } from "@/components/layout/search-form";
 import { StickyHeader } from "@/components/layout/sticky-header";
-import { site } from "@/lib/site";
+import { routes, site } from "@/lib/site";
 
 function TopBar() {
   return (
@@ -48,14 +48,14 @@ export function Header() {
             <div className="lg:hidden">
               <MobileNav />
             </div>
-            <Link href="/" className="hidden lg:block" aria-label={`${site.name} — home`}>
+            <Link href={routes.home} className="hidden lg:block" aria-label={`${site.name} — home`}>
               <Logo className="w-56 xl:w-64" />
             </Link>
           </div>
 
           {/* Centre: monogram (mobile) / nav (desktop) */}
           <div className="flex justify-center">
-            <Link href="/" className="lg:hidden" aria-label={`${site.name} — home`}>
+            <Link href={routes.home} className="lg:hidden" aria-label={`${site.name} — home`}>
               <LogoMark className="size-12" />
             </Link>
             <nav aria-label="Main" className="hidden lg:block">
@@ -63,10 +63,18 @@ export function Header() {
             </nav>
           </div>
 
-          {/* Right: search + cart */}
-          <div className="flex items-center justify-end gap-2">
-            <SearchForm className="hidden w-56 lg:block xl:w-64" />
-            <CartLink />
+          {/* Right: search + account, wishlist, cart */}
+          <div className="flex items-center justify-end gap-1 sm:gap-2">
+            <SearchForm className="mr-2 hidden w-56 lg:block xl:w-64" />
+            {/* TODO(phase 6): switch to "My Account" when signed in. */}
+            <HeaderIconLink
+              href={routes.login}
+              label="Login / Register"
+              icon={UserRound}
+              className="hidden sm:inline-flex"
+            />
+            <HeaderIconLink href={routes.wishlist} label="Wishlist" icon={Heart} count={0} />
+            <HeaderIconLink href={routes.cart} label="Cart" icon={ShoppingBag} count={0} />
           </div>
         </div>
       </StickyHeader>
