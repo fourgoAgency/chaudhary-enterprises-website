@@ -42,7 +42,7 @@ export function Hero({ products }: { products: Product[] }) {
                   i === 0 && "row-span-2",
                 )}
               >
-                <span className="relative block flex-1 overflow-hidden rounded-md bg-blue-tint">
+                <span className="relative block flex-1 overflow-hidden rounded-md bg-white">
                   <span className={cn("relative block", i === 0 ? "h-full min-h-56" : "aspect-[4/3]")}>
                     <Image
                       src={p.images[0].src}
