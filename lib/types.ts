@@ -47,13 +47,12 @@ export type Product = {
   slug: string;
   name: string;
   sku: string;
+  upc?: string;
   asin?: string;
   brand: string;
   category: CategorySlug;
-  /** One or two sentences for cards and the top of the product page. */
-  summary: string;
-  /** Long description; paragraphs separated by blank lines. */
   description: string;
+  highlights: string[];
   specs: ProductSpec[];
   images: ProductImage[];
   /** Units per case. Orders must be a whole number of cases. */
@@ -64,6 +63,6 @@ export type Product = {
   /** Sorted ascending by minQty; the first tier starts at the MOQ. */
   tiers: PriceTier[];
   featured?: boolean;
-  /** ISO date the product was added; drives "Newest" sorting. */
-  createdAt: string;
+  /** Position in the source file; later entries count as newer. */
+  position: number;
 };

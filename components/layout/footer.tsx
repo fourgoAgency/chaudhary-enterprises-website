@@ -77,11 +77,10 @@ export function Footer() {
       </div>
 
       <div className="border-t border-ivory/15">
-        <div className="container-site flex flex-col gap-2 py-6 text-xs text-ivory/70 sm:flex-row sm:justify-between">
+        <div className="container-site py-6 text-xs text-ivory/70">
           <p>
             © <CopyrightYear /> {site.name}. All rights reserved.
           </p>
-          <p>Card payments are processed securely by Stripe.</p>
         </div>
       </div>
     </footer>

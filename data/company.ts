@@ -33,8 +33,11 @@ export const reasons = [
 ];
 
 export const orderSteps = [
-  { title: "Browse", body: "Find products by category, SKU or ASIN and compare tier prices." },
+  { title: "Browse", body: "Find products by category, SKU or UPC and compare tier prices." },
   { title: "Add bulk quantities", body: "Order in whole cases from the minimum order quantity upwards." },
-  { title: "Checkout", body: "Pay securely by card and add your business and FBA prep details." },
+  {
+    title: "Send your order",
+    body: "Submit your order with business and FBA prep details. We confirm stock, shipping and invoice by email.",
+  },
   { title: "Ship to FBA", body: "We ship to your warehouse or straight to an Amazon fulfilment centre." },
 ];

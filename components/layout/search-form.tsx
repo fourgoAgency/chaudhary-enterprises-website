@@ -13,7 +13,7 @@ export function SearchForm({ className, id = "site-search" }: { className?: stri
         id={id}
         name="q"
         type="search"
-        placeholder="Search products, SKU or ASIN"
+        placeholder="Search products, SKU or UPC"
         className="h-10 w-full border border-line bg-white pr-10 pl-3 text-sm text-ink placeholder:text-muted focus:border-gold focus:outline-none"
       />
       <button

@@ -7,6 +7,7 @@ import { getCategories, getFeaturedProducts, getProductCountsByCategory } from "
 import { formatPrice, getTierRangeLabel } from "@/lib/pricing";
 import { routes, site } from "@/lib/site";
 import type { Product } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 // TODO(phase 6): replace with the bulk-quote modal.
 const quoteHref = `mailto:${site.contact.email}?subject=${encodeURIComponent("Bulk quote request")}`;
@@ -123,18 +124,26 @@ export default async function HomePage() {
       <section className="container-site py-16 sm:py-24">
         <SectionHeader
           title="Shop by category"
-          intro="Fifteen departments, each stocked with case-packed products ready to list."
+          intro="Case-packed products from authorized supply channels, ready to list."
           action={<TextLink href={routes.shop}>View all products</TextLink>}
         />
-        <ul className="mt-10 grid grid-cols-2 border-t border-l border-line lg:grid-cols-3 xl:grid-cols-5">
+        <ul
+          className={cn(
+            "mt-10 grid border-t border-l border-line",
+            categories.length > 4 ? "grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" : "sm:grid-cols-2",
+          )}
+        >
           {categories.map((c) => (
             <li key={c.slug} className="border-r border-b border-line">
               <Link
                 href={`${routes.shop}/${c.slug}`}
                 className="group flex h-full flex-col justify-between gap-3 p-4 transition-colors hover:bg-white sm:gap-6 sm:p-5"
               >
-                <span className="font-serif text-lg leading-tight text-navy group-hover:text-gold-dark sm:text-xl">
-                  {c.name}
+                <span>
+                  <span className="block font-serif text-lg leading-tight text-navy group-hover:text-gold-dark sm:text-xl">
+                    {c.name}
+                  </span>
+                  {categories.length <= 4 && <span className="mt-2 block text-sm text-muted">{c.description}</span>}
                 </span>
                 <span className="flex items-center justify-between text-xs text-muted">
                   {counts[c.slug]} {counts[c.slug] === 1 ? "product" : "products"}

@@ -6,7 +6,7 @@ export const site = {
   description:
     "Chaudhary Enterprises LLC is a Wyoming-based wholesale distributor supplying genuine branded products in bulk to retailers and online sellers across the United States.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://chaudharyenterprisesllc.com",
-  // ISO 4217 code used for all prices and Stripe Checkout
+  // ISO 4217 code used for all prices
   currency: "USD",
   locale: "en-US",
   contact: {
@@ -53,9 +53,14 @@ export const accountNav = [
   { label: "Cart", href: routes.cart },
 ] as const;
 
-// Footer policy links. Page content is supplied by the client.
-export const serviceNav = [
-  { label: "Shipping & Returns", href: "/shipping-returns" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms & Conditions", href: "/terms" },
+// Policy pages; content lives in content/policies/<slug>.md.
+export const policies = [
+  { slug: "shipping-policy", label: "Shipping Policy" },
+  { slug: "returns-policy", label: "Returns & Refunds" },
+  { slug: "privacy-policy", label: "Privacy Policy" },
+  { slug: "terms", label: "Terms & Conditions" },
 ] as const;
+
+export type PolicySlug = (typeof policies)[number]["slug"];
+
+export const serviceNav = policies.map((p) => ({ label: p.label, href: `/${p.slug}` }));

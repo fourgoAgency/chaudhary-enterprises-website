@@ -1,11 +1,12 @@
 import type { Category } from "@/lib/types";
 
+// All departments the business supplies. Only categories that have products are shown on the site.
 // Order matches navigation, home tiles and shop filters.
 export const categories: Category[] = [
   {
     slug: "health-household",
     name: "Health & Household",
-    description: "Everyday health, cleaning and household essentials in bulk.",
+    description: "Everyday wellness and household essentials for retail and online sellers.",
   },
   {
     slug: "beauty-personal-care",
@@ -15,7 +16,7 @@ export const categories: Category[] = [
   {
     slug: "grocery-gourmet-food",
     name: "Grocery & Gourmet Food",
-    description: "Shelf-stable pantry staples and gourmet goods with clear dating.",
+    description: "Pantry staples, teas, sauces and specialty foods supplied in bulk.",
   },
   {
     slug: "kitchen-dining",

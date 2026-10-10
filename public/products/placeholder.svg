@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#F4EEE2"/>
+  <g fill="none" stroke="#B8924A" stroke-width="3" stroke-linejoin="round" opacity="0.8">
+    <path d="M300 215 L380 255 L380 345 L300 385 L220 345 L220 255 Z"/>
+    <path d="M220 255 L300 295 L380 255 M300 295 L300 385"/>
+  </g>
+  <text x="300" y="440" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="15" fill="#5B6170">Image coming soon</text>
+</svg>

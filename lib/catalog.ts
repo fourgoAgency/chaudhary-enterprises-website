@@ -50,16 +50,15 @@ export type CatalogFacets = {
 
 // ---- Categories ----
 
+// Only categories that currently have products are shown; others appear once products are added.
+const activeCategories = categories.filter((c) => products.some((p) => p.category === c.slug));
+
 export async function getCategories(): Promise<Category[]> {
-  return categories;
+  return activeCategories;
 }
 
 export async function getCategory(slug: string): Promise<Category | undefined> {
-  return categories.find((c) => c.slug === slug);
-}
-
-export function isCategorySlug(value: string): value is CategorySlug {
-  return categories.some((c) => c.slug === value);
+  return activeCategories.find((c) => c.slug === slug);
 }
 
 // ---- Products ----
@@ -78,10 +77,7 @@ export async function getProductsBySlugs(slugs: string[]): Promise<Product[]> {
 }
 
 export async function getFeaturedProducts(limit = 8): Promise<Product[]> {
-  return products
-    .filter((p) => p.featured)
-    .sort(byNewest)
-    .slice(0, limit);
+  return products.filter((p) => p.featured).slice(0, limit);
 }
 
 /** Same-category products first, topped up with featured items from other categories. */
@@ -120,7 +116,7 @@ export async function queryProducts(query: ProductQuery = {}): Promise<ProductQu
     return true;
   });
 
-  const sorted = filtered.sort(comparators[query.sort ?? "featured"]);
+  const sorted = [...filtered].sort(comparators[query.sort ?? "featured"]);
   const total = sorted.length;
   const pageCount = Math.max(1, Math.ceil(total / perPage));
   const page = Math.min(Math.max(1, query.page ?? 1), pageCount);
@@ -158,15 +154,15 @@ function normalize(value: string) {
 }
 
 function searchText(p: Product) {
-  return normalize([p.name, p.sku, p.asin, p.brand, p.summary, categoryNames.get(p.category)].join(" "));
+  return normalize([p.name, p.sku, p.upc, p.asin, p.brand, categoryNames.get(p.category)].join(" "));
 }
 
 function byNewest(a: Product, b: Product) {
-  return b.createdAt.localeCompare(a.createdAt);
+  return b.position - a.position;
 }
 
 const comparators: Record<SortKey, (a: Product, b: Product) => number> = {
-  featured: (a, b) => Number(!!b.featured) - Number(!!a.featured) || byNewest(a, b),
+  featured: (a, b) => Number(!!b.featured) - Number(!!a.featured) || a.position - b.position,
   "price-asc": (a, b) => getFromPrice(a.tiers) - getFromPrice(b.tiers),
   "price-desc": (a, b) => getFromPrice(b.tiers) - getFromPrice(a.tiers),
   newest: byNewest,
