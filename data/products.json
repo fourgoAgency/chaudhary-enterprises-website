@@ -302,26 +302,7 @@
       "images": ["/products/jellua-professional-squidink-active-shampoo-repair-treatment-cream-set-1.jpg"],
       "featured": false
     },
-    {
-      "id": "CE-BP-004",
-      "sku": "CE-BP-004",
-      "slug": "walker-tape-ultra-hold-contour-tape-strips",
-      "upc": "856459002689",
-      "name": "Ultra Hold Contour Tape Strips",
-      "brand": "Walker Tape",
-      "category": "Beauty & Personal Care",
-      "categorySlug": "beauty-personal-care",
-      "description": "Walker Tape Ultra Hold pre-cut contour tape strips for hair systems and wigs.",
-      "highlights": ["Ultra Hold adhesive", "Pre-cut contour shape"],
-      "specifications": {
-        "Shape": "Contour"
-      },
-      "price": 8.99,
-      "currency": "USD",
-      "stockStatus": "in_stock",
-      "images": ["/products/walker-tape-ultra-hold-contour-tape-strips-1.jpg"],
-      "featured": false
-    },
+
     {
       "id": "CE-BP-005",
       "sku": "CE-BP-005",
