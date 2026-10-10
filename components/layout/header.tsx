@@ -48,8 +48,7 @@ export async function Header() {
           </div>
 
           <Link href={routes.home} aria-label={`${site.name} home`} className="shrink-0">
-            <Logo compact className="sm:hidden" />
-            <Logo className="hidden sm:inline-flex" />
+            <Logo className="w-32 sm:w-40" />
           </Link>
 
           <div className="hidden lg:block">

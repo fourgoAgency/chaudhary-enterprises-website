@@ -1,43 +1,38 @@
 import { cn } from "@/lib/utils";
 
-// Temporary text logo. The supplied /public/logo*.svg files use the old gold palette, so they
-// aren't used until a blue/black/white logo is supplied.
+// Same artwork as /public/logo.svg (light) and /public/logo-dark.svg (dark), drawn inline so the
+// wordmark uses the Inter font loaded in the root layout.
+
+const FONT = "var(--font-inter), Inter, 'Helvetica Neue', Arial, sans-serif";
 
 type LogoProps = {
-  /** "light" = for white backgrounds (black text); "dark" = for black/blue backgrounds (white text). */
+  /** "light" = for white backgrounds (black wordmark); "dark" = for black/blue backgrounds (white wordmark). */
   tone?: "light" | "dark";
-  /** Hide the "Enterprises LLC" line (compact mobile header). */
-  compact?: boolean;
   className?: string;
 };
 
-export function Logo({ tone = "light", compact = false, className }: LogoProps) {
+export function Logo({ tone = "light", className }: LogoProps) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark />
-      <span className={cn("flex flex-col leading-none", tone === "dark" ? "text-white" : "text-black")}>
-        <span className="text-xl font-bold tracking-[-0.02em]">Chaudhary</span>
-        {!compact && (
-          <span className={cn("mt-1 text-xs font-medium", tone === "dark" ? "text-white/80" : "text-muted")}>
-            Enterprises LLC
-          </span>
-        )}
-      </span>
-    </span>
-  );
-}
-
-/** "CE" monogram in a blue square. */
-export function LogoMark({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden
-      className={cn(
-        "inline-flex size-9 shrink-0 items-center justify-center rounded-md bg-blue text-sm font-bold tracking-tight text-white",
-        className,
-      )}
+    <svg
+      viewBox="0 16 272 76"
+      role="img"
+      aria-label="Chaudhary Enterprises LLC"
+      className={cn("h-auto w-40 overflow-visible", className)}
     >
-      CE
-    </span>
+      <text
+        x="6"
+        y="60"
+        fontFamily={FONT}
+        fontWeight="800"
+        fontSize="50"
+        letterSpacing="-2.4"
+        fill={tone === "dark" ? "#FFFFFF" : "#000000"}
+      >
+        chaudhary<tspan fill="#0066FF">.</tspan>
+      </text>
+      <text x="9" y="84" fontFamily={FONT} fontWeight="600" fontSize="12" letterSpacing="7.4" fill="#0066FF">
+        ENTERPRISES LLC
+      </text>
+    </svg>
   );
 }

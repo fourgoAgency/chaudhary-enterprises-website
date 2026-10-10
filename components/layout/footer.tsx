@@ -37,7 +37,7 @@ export function Footer() {
         <div className="container-site grid gap-x-10 gap-y-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.4fr]">
           <div className="max-w-sm">
             <Link href={routes.home} aria-label={`${site.name} home`} className="inline-block">
-              <Logo tone="dark" />
+              <Logo tone="dark" className="w-44" />
             </Link>
             <p className="mt-5 text-sm text-white/80">
               Genuine products from trusted brands, shipped from Sheridan, Wyoming to customers across the United
