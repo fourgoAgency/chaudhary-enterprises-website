@@ -1,7 +1,7 @@
 import nodemailer, { type Transporter } from "nodemailer";
 import { site } from "@/lib/site";
 
-// SMTP email (orders and quote requests). Server-only: never import this from a Client Component.
+// SMTP email for orders. Server-only: never import this from a Client Component.
 //
 // Settings come from environment variables so the SMTP password is never committed to git.
 // Put them in .env.local for development and in your host's environment settings in production.
