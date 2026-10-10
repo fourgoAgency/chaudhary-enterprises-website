@@ -1,78 +1,152 @@
 "use client";
 
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NavigationMenu } from "radix-ui";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { mainNav, routes } from "@/lib/site";
 import type { Category } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const linkClass =
-  "relative inline-flex h-10 items-center px-3 text-[15px] font-semibold text-black transition-colors hover:text-blue data-active:text-blue";
+  "inline-flex h-10 items-center px-3 text-[15px] font-semibold text-black transition-colors hover:text-blue";
 
 type NavCategory = Category & { count: number };
 
 export function DesktopNav({ categories }: { categories: NavCategory[] }) {
   const pathname = usePathname();
-  const inCategory = pathname.startsWith(`${routes.shop}/`);
 
   return (
-    // `static` so the mega-menu panel positions against the sticky header, not this list.
-    <NavigationMenu.Root aria-label="Main" className="static" delayDuration={80}>
-      <NavigationMenu.List className="flex items-center gap-1">
+    <nav aria-label="Main">
+      <ul className="flex items-center gap-1">
         {mainNav.map((item) => (
-          <NavigationMenu.Item key={item.href}>
-            <NavigationMenu.Link asChild active={pathname === item.href}>
-              <Link href={item.href} className={linkClass}>
-                {item.label}
-              </Link>
-            </NavigationMenu.Link>
-          </NavigationMenu.Item>
+          <li key={item.href}>
+            <Link
+              href={item.href}
+              aria-current={pathname === item.href ? "page" : undefined}
+              className={cn(linkClass, pathname === item.href && "text-blue")}
+            >
+              {item.label}
+            </Link>
+          </li>
         ))}
+        <li>
+          <CategoriesMenu categories={categories} pathname={pathname} />
+        </li>
+      </ul>
+    </nav>
+  );
+}
 
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger className={cn(linkClass, "group gap-1", inCategory && "text-blue")}>
-            Categories
-            <ChevronDown
-              className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180"
-              aria-hidden
-            />
-          </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="absolute inset-x-0 top-full border-b border-line bg-white shadow-card">
-            <div className="container-site grid grid-cols-[1fr_16rem] gap-10 py-7">
-              <ul className="grid grid-cols-3 gap-x-8 gap-y-1">
-                {categories.map((c) => (
-                  <li key={c.slug}>
-                    <NavigationMenu.Link asChild active={pathname === `${routes.shop}/${c.slug}`}>
-                      <Link
-                        href={`${routes.shop}/${c.slug}`}
-                        className="flex items-baseline justify-between gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-blue-tint data-active:bg-blue-tint data-active:text-blue"
-                      >
-                        <span className="font-medium">{c.name}</span>
-                        <span className="text-sm text-muted tabular-nums">{c.count}</span>
-                      </Link>
-                    </NavigationMenu.Link>
-                  </li>
-                ))}
-              </ul>
-              <div className="surface-blue rounded-lg bg-blue p-5 text-white">
-                <p className="text-lg font-bold">Browse the full range</p>
-                <p className="mt-1 text-sm">Every product from every category in one place.</p>
-                <NavigationMenu.Link asChild>
+/** "Categories" dropdown: opens on click or hover; closes on Escape, outside click or navigation. */
+function CategoriesMenu({ categories, pathname }: { categories: NavCategory[]; pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  // True when hover just opened the menu, so the click that usually follows doesn't close it again.
+  const openedByHover = useRef(false);
+  const panelId = useId();
+  const inCategory = pathname.startsWith(`${routes.shop}/`);
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  useEffect(() => () => clearTimeout(closeTimer.current), []);
+
+  // Hover opens straight away and closes after a short delay, so moving onto the panel is forgiving.
+  const onMouseEnter = (e: React.MouseEvent) => {
+    if ((e.nativeEvent as PointerEvent).pointerType === "touch") return;
+    clearTimeout(closeTimer.current);
+    if (!open) openedByHover.current = true;
+    setOpen(true);
+  };
+  const onMouseLeave = () => {
+    clearTimeout(closeTimer.current);
+    openedByHover.current = false;
+    closeTimer.current = setTimeout(() => setOpen(false), 150);
+  };
+
+  return (
+    <div
+      ref={rootRef}
+      className="relative"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpen(false);
+      }}
+    >
+      <button
+        ref={buttonRef}
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => {
+          if (openedByHover.current) openedByHover.current = false;
+          else setOpen((o) => !o);
+        }}
+        className={cn(linkClass, "gap-1", (open || inCategory) && "text-blue")}
+      >
+        Categories
+        <ChevronDown className={cn("size-4 transition-transform duration-200", open && "rotate-180")} aria-hidden />
+      </button>
+
+      <div
+        id={panelId}
+        hidden={!open}
+        className="absolute top-full left-0 z-50 w-[30rem] pt-2 data-[open]:animate-[fade-in_150ms]"
+        data-open={open ? "" : undefined}
+      >
+        <div className="rounded-lg border border-line bg-white p-3 shadow-card">
+          <ul className="grid grid-cols-2 gap-1">
+            {categories.map((c) => {
+              const href = `${routes.shop}/${c.slug}`;
+              const active = pathname === href;
+              return (
+                <li key={c.slug}>
                   <Link
-                    href={routes.shop}
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold underline underline-offset-4"
+                    href={href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex items-center justify-between gap-3 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-blue-tint hover:text-blue",
+                      active && "bg-blue-tint font-semibold text-blue",
+                    )}
                   >
-                    Shop all products
-                    <ArrowRight className="size-4" aria-hidden />
+                    <span className="font-medium">{c.name}</span>
+                    <span className="text-xs text-muted tabular-nums">{c.count}</span>
                   </Link>
-                </NavigationMenu.Link>
-              </div>
-            </div>
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-      </NavigationMenu.List>
-    </NavigationMenu.Root>
+                </li>
+              );
+            })}
+          </ul>
+          <Link
+            href={routes.shop}
+            onClick={() => setOpen(false)}
+            className="mt-2 flex items-center justify-between rounded-md bg-blue px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-hover"
+          >
+            Shop all products
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
