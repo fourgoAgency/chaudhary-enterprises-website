@@ -6,9 +6,9 @@
       "description": "Pantry staples, teas, sauces and specialty foods supplied in bulk."
     },
     {
-      "name": "Health & Household",
-      "slug": "health-household",
-      "description": "Everyday wellness and household essentials for retail and online sellers."
+      "name": "Tools & Home Improvement",
+      "slug": "tools-home-improvement",
+      "description": "Professional tools and building supplies for contractors and retailers."
     }
   ],
   "products": [
@@ -17,27 +17,46 @@
       "sku": "CE-GF-001",
       "slug": "green-foods-organic-ceremonial-grade-matcha-green-tea-11-oz",
       "upc": "083851209228",
-      "name": "Organic Ceremonial Grade Matcha Green Tea, 11 oz",
+      "name": "Ceremonial Grade Matcha Green Tea Energy Blend, 11 oz",
       "brand": "Green Foods",
       "category": "Grocery & Gourmet Food",
       "categorySlug": "grocery-gourmet-food",
-      "description": "First-harvest ceremonial grade matcha green tea powder in an 11 oz pack, suited to whisked tea, lattes and smoothies.",
-      "highlights": ["Ceremonial grade", "First harvest", "Certified organic (per manufacturer)", "11 oz pack"],
+      "description": "USDA Organic ceremonial grade matcha green tea energy blend in an 11 oz (312 g) canister. Dissolves easily in hot or cold water for tea, lattes and smoothies.",
+      "highlights": [
+        "Ceremonial grade",
+        "USDA Organic",
+        "Dissolves easily in hot or cold water",
+        "Farm-direct, whole-leaf and shade-grown (per manufacturer)"
+      ],
       "specifications": {
-        "Net weight": "11 oz",
+        "Net weight": "11 oz (312 g)",
         "Form": "Powder",
-        "Type": "Matcha green tea"
+        "Container": "Canister"
       },
       "casePack": 12,
       "moq": 12,
       "stockStatus": "in_stock",
       "currency": "USD",
       "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 19.1 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 17.93 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 16.9 }
+        {
+          "minQty": 1,
+          "maxQty": 47,
+          "unitPrice": 19.1
+        },
+        {
+          "minQty": 48,
+          "maxQty": 143,
+          "unitPrice": 17.93
+        },
+        {
+          "minQty": 144,
+          "maxQty": null,
+          "unitPrice": 16.9
+        }
       ],
-      "images": ["/products/green-foods-organic-ceremonial-grade-matcha-green-tea-11-oz-1.jpg"],
+      "images": [
+        "/products/green-foods-organic-ceremonial-grade-matcha-green-tea-11-oz-1.jpg"
+      ],
       "featured": true
     },
     {
@@ -45,27 +64,46 @@
       "sku": "CE-GF-002",
       "slug": "green-foods-organic-matcha-green-tea-5-5-oz",
       "upc": "083851209006",
-      "name": "Organic Matcha Green Tea, 5.5 oz",
+      "name": "Ceremonial Grade Matcha Green Tea Energy Blend, 5.5 oz",
       "brand": "Green Foods",
       "category": "Grocery & Gourmet Food",
       "categorySlug": "grocery-gourmet-food",
-      "description": "Organic matcha green tea powder in a convenient 5.5 oz size for everyday tea and recipe use.",
-      "highlights": ["Certified organic (per manufacturer)", "5.5 oz pack", "Versatile for drinks and baking"],
+      "description": "USDA Organic ceremonial grade matcha green tea energy blend in a 5.5 oz (156 g) canister. Dissolves easily in hot or cold water.",
+      "highlights": [
+        "Ceremonial grade",
+        "USDA Organic",
+        "Dissolves easily in hot or cold water",
+        "Farm-direct, whole-leaf and shade-grown (per manufacturer)"
+      ],
       "specifications": {
-        "Net weight": "5.5 oz",
+        "Net weight": "5.5 oz (156 g)",
         "Form": "Powder",
-        "Type": "Matcha green tea"
+        "Container": "Canister"
       },
       "casePack": 12,
       "moq": 12,
       "stockStatus": "in_stock",
       "currency": "USD",
       "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 10.91 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 10.24 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 9.65 }
+        {
+          "minQty": 1,
+          "maxQty": 47,
+          "unitPrice": 10.91
+        },
+        {
+          "minQty": 48,
+          "maxQty": 143,
+          "unitPrice": 10.24
+        },
+        {
+          "minQty": 144,
+          "maxQty": null,
+          "unitPrice": 9.65
+        }
       ],
-      "images": ["/products/green-foods-organic-matcha-green-tea-5-5-oz-1.jpg"],
+      "images": [
+        "/products/green-foods-organic-matcha-green-tea-5-5-oz-1.jpg"
+      ],
       "featured": false
     },
     {
@@ -73,196 +111,93 @@
       "sku": "CE-GF-003",
       "slug": "green-foods-organic-wheat-grass-shots-10-6-oz",
       "upc": "083851203448",
-      "name": "Organic Wheat Grass Shots, 10.6 oz",
+      "name": "Organic & Raw Wheat Grass Shots, 10.6 oz",
       "brand": "Green Foods",
       "category": "Grocery & Gourmet Food",
       "categorySlug": "grocery-gourmet-food",
-      "description": "Organic wheat grass powder for quick shots or mixing into juices and smoothies.",
+      "description": "Organic and raw wheat grass juice powder in a 10.6 oz (300 g) canister, for quick shots or mixing into juices and smoothies.",
       "highlights": [
-        "Certified organic, kosher, vegan (per manufacturer)",
-        "Gluten-free and soy-free (per manufacturer)",
-        "10.6 oz container"
+        "USDA Organic",
+        "Organic, vegan, gluten-free, non-GMO (per label)",
+        "10.6 oz (300 g) canister"
       ],
       "specifications": {
-        "Net weight": "10.6 oz",
-        "Form": "Powder"
+        "Net weight": "10.6 oz (300 g)",
+        "Form": "Juice powder",
+        "Container": "Canister"
       },
       "casePack": 12,
       "moq": 12,
       "stockStatus": "in_stock",
       "currency": "USD",
       "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 21.83 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 20.49 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 19.31 }
+        {
+          "minQty": 1,
+          "maxQty": 47,
+          "unitPrice": 21.83
+        },
+        {
+          "minQty": 48,
+          "maxQty": 143,
+          "unitPrice": 20.49
+        },
+        {
+          "minQty": 144,
+          "maxQty": null,
+          "unitPrice": 19.31
+        }
       ],
-      "images": ["/products/green-foods-organic-wheat-grass-shots-10-6-oz-1.jpg"],
+      "images": [
+        "/products/green-foods-organic-wheat-grass-shots-10-6-oz-1.jpg"
+      ],
       "featured": false
     },
     {
-      "id": "CE-HH-001",
-      "sku": "CE-HH-001",
-      "slug": "green-foods-original-green-magma-barley-grass-supplement-250-tablets",
-      "upc": "083851204285",
-      "name": "Original Green Magma Barley Grass Supplement, 250 Tablets",
-      "brand": "Green Foods",
-      "category": "Health & Household",
-      "categorySlug": "health-household",
-      "description": "Barley grass nutritional supplement in tablet form, 250 tablets of 500 mg each.",
-      "highlights": ["250 tablets", "500 mg per tablet", "Certified organic (per manufacturer)"],
-      "specifications": {
-        "Count": "250 tablets",
-        "Strength": "500 mg per tablet",
-        "Form": "Tablet"
-      },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
-      "currency": "USD",
-      "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 15.03 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 14.11 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 13.3 }
-      ],
-      "images": ["/products/green-foods-original-green-magma-barley-grass-supplement-250-tablets-1.jpg"],
-      "featured": true
-    },
-    {
-      "id": "CE-HH-002",
-      "sku": "CE-HH-002",
-      "slug": "green-foods-organic-chlorella-500-mg-120-count",
-      "upc": "083851204155",
-      "name": "Organic Chlorella 500 mg, 120 Count",
-      "brand": "Green Foods",
-      "category": "Health & Household",
-      "categorySlug": "health-household",
-      "description": "Organic chlorella supplement, 120 tablets of 500 mg each.",
-      "highlights": ["120 count", "500 mg per tablet", "Organic (per manufacturer)"],
-      "specifications": {
-        "Count": "120 tablets",
-        "Strength": "500 mg per tablet",
-        "Form": "Tablet"
-      },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
-      "currency": "USD",
-      "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 10.37 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 9.73 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 9.17 }
-      ],
-      "images": ["/products/green-foods-organic-chlorella-500-mg-120-count-1.jpg"],
-      "featured": false
-    },
-    {
-      "id": "CE-GF-004",
-      "sku": "CE-GF-004",
-      "slug": "hellfire-hot-sauce-gourmet-green-hot-sauce-with-carolina-reaper",
-      "upc": "855713005183",
-      "name": "Gourmet Green Hot Sauce with Carolina Reaper",
-      "brand": "Hellfire Hot Sauce",
-      "category": "Grocery & Gourmet Food",
-      "categorySlug": "grocery-gourmet-food",
-      "description": "A green hot sauce made with Carolina Reaper peppers, for customers who like serious heat with flavour.",
-      "highlights": ["Made with Carolina Reaper peppers", "Very hot", "Gourmet green sauce"],
-      "specifications": {
-        "Heat level": "Very hot",
-        "Type": "Hot sauce"
-      },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
-      "currency": "USD",
-      "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 9.09 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 8.53 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 8.04 }
-      ],
-      "images": ["/products/hellfire-hot-sauce-gourmet-green-hot-sauce-with-carolina-reaper-1.jpg"],
-      "featured": true
-    },
-    {
-      "id": "CE-GF-005",
-      "sku": "CE-GF-005",
-      "slug": "hellfire-hot-sauce-doomed-extreme-hot-sauce",
-      "upc": "855713005442",
-      "name": "Doomed Extreme Hot Sauce",
-      "brand": "Hellfire Hot Sauce",
-      "category": "Grocery & Gourmet Food",
-      "categorySlug": "grocery-gourmet-food",
-      "description": "An extreme-heat novelty hot sauce for chilli enthusiasts. Not intended for casual use.",
-      "highlights": ["Extreme heat", "Novelty / challenge sauce", "Use in very small amounts"],
-      "specifications": {
-        "Heat level": "Extreme",
-        "Type": "Hot sauce"
-      },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
-      "currency": "USD",
-      "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 13.0 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 12.2 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 11.5 }
-      ],
-      "images": ["/products/hellfire-hot-sauce-doomed-extreme-hot-sauce-1.jpg"],
-      "featured": false
-    },
-    {
-      "id": "CE-GF-006",
-      "sku": "CE-GF-006",
-      "slug": "hellfire-hot-sauce-fiery-fool-extreme-hot-sauce-no-extract",
+      "id": "CE-TH-001",
+      "sku": "CE-TH-001",
+      "slug": "delko-drywall-taping-tool-with-inside-corner-applicator-dtah1",
       "upc": null,
-      "name": "Fiery Fool Extreme Hot Sauce (No Extract)",
-      "brand": "Hellfire Hot Sauce",
-      "category": "Grocery & Gourmet Food",
-      "categorySlug": "grocery-gourmet-food",
-      "description": "An extreme hot sauce made without pepper extract, getting its heat from the peppers themselves.",
-      "highlights": ["Extreme heat", "No pepper extract", "Small-batch style"],
+      "name": "Drywall Taping Tool with Inside Corner Applicator Attachment (DTAH1)",
+      "brand": "Delko Tools",
+      "category": "Tools & Home Improvement",
+      "categorySlug": "tools-home-improvement",
+      "description": "A drywall taping tool that applies joint compound and tape in one pass, supplied with an inside corner applicator attachment.",
+      "highlights": [
+        "Applies both compound and paper tape (per manufacturer)",
+        "Includes inside corner applicator attachment",
+        "Improved handle construction and control knob",
+        "Spare control knob included"
+      ],
       "specifications": {
-        "Heat level": "Extreme",
-        "Type": "Hot sauce"
+        "Model": "DTAH1",
+        "Shipping weight": "2.7 lb",
+        "Pack": "1 unit"
       },
-      "casePack": 12,
-      "moq": 12,
+      "casePack": 1,
+      "moq": 5,
       "stockStatus": "in_stock",
       "currency": "USD",
       "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 13.0 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 12.2 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 11.5 }
+        {
+          "minQty": 1,
+          "maxQty": 47,
+          "unitPrice": 42.18
+        },
+        {
+          "minQty": 48,
+          "maxQty": 143,
+          "unitPrice": 39.58
+        },
+        {
+          "minQty": 144,
+          "maxQty": null,
+          "unitPrice": 37.31
+        }
       ],
-      "images": ["/products/hellfire-hot-sauce-fiery-fool-extreme-hot-sauce-no-extract-1.jpg"],
-      "featured": false
-    },
-    {
-      "id": "CE-GF-007",
-      "sku": "CE-GF-007",
-      "slug": "hellfire-hot-sauce-fear-this-carolina-reaper-hot-sauce-148-ml",
-      "upc": "855713005022",
-      "name": "Fear This! Carolina Reaper Hot Sauce, 148 ml",
-      "brand": "Hellfire Hot Sauce",
-      "category": "Grocery & Gourmet Food",
-      "categorySlug": "grocery-gourmet-food",
-      "description": "A Carolina Reaper hot sauce in a 148 ml bottle, built for heat seekers.",
-      "highlights": ["Made with Carolina Reaper peppers", "148 ml bottle", "Very hot"],
-      "specifications": {
-        "Volume": "148 ml (5 fl oz)",
-        "Heat level": "Very hot",
-        "Type": "Hot sauce"
-      },
-      "casePack": 12,
-      "moq": 12,
-      "stockStatus": "in_stock",
-      "currency": "USD",
-      "priceTiers": [
-        { "minQty": 1, "maxQty": 47, "unitPrice": 13.0 },
-        { "minQty": 48, "maxQty": 143, "unitPrice": 12.2 },
-        { "minQty": 144, "maxQty": null, "unitPrice": 11.5 }
+      "images": [
+        "/products/delko-drywall-taping-tool-with-inside-corner-applicator-dtah1-1.jpg"
       ],
-      "images": ["/products/hellfire-hot-sauce-fear-this-carolina-reaper-hot-sauce-148-ml-1.jpg"],
-      "featured": false
+      "featured": true
     }
   ]
 }

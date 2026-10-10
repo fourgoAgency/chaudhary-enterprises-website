@@ -11,7 +11,7 @@ We sell at wholesale to businesses that purchase products for resale or business
 
 ### 2. Your account
 
-You must give accurate and complete information when registering and keep it up to date. You are responsible for keeping your password secure and for all activity under your account. Tell us immediately at admin@chaudharyenterprisesllc.com if you suspect unauthorised use. We may suspend or close accounts that break these Terms or show signs of fraud.
+You must give accurate and complete information when registering and keep it up to date. Your account is saved in your browser on your device. You are responsible for keeping your password and device secure and for all activity under your account.
 
 ### 3. Products and product information
 
@@ -31,7 +31,7 @@ Placing an order is an offer to buy. Your order is accepted only when we send an
 
 ### 6. Payment
 
-We accept card payments through our secure payment provider, Stripe, [and bank wire transfer for approved accounts]. Full payment is due at checkout unless we have agreed other terms with you in writing. Orders paid by wire transfer ship after funds clear.
+We do not take payment on the Site. After we confirm your order, we email an invoice with payment instructions. We accept [payment methods, e.g. bank wire transfer]. Full payment is due before your order ships unless we have agreed other terms with you in writing. Orders paid by wire transfer ship after funds clear.
 
 ### 7. Taxes and resale certificates
 

@@ -1,5 +1,5 @@
 import { categories } from "@/data/categories";
-import { products } from "@/data/products";
+import { categoryOverrides, products } from "@/data/products";
 import { getFromPrice } from "@/lib/pricing";
 import type { SortKey } from "@/lib/shop-params";
 import type { Category, CategorySlug, Product } from "@/lib/types";
@@ -43,7 +43,9 @@ export type CatalogFacets = {
 // ---- Categories ----
 
 // Only categories that currently have products are shown; others appear once products are added.
-const activeCategories = categories.filter((c) => products.some((p) => p.category === c.slug));
+const activeCategories = categories
+  .filter((c) => products.some((p) => p.category === c.slug))
+  .map((c) => ({ ...c, ...categoryOverrides.get(c.slug) }));
 
 export async function getCategories(): Promise<Category[]> {
   return activeCategories;
@@ -139,7 +141,7 @@ export async function getFacets(category?: CategorySlug): Promise<CatalogFacets>
 
 // ---- Helpers ----
 
-const categoryNames = new Map(categories.map((c) => [c.slug, c.name]));
+const categoryNames = new Map(activeCategories.map((c) => [c.slug, c.name]));
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/\s+/g, " ").trim();

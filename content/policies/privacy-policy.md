@@ -9,36 +9,29 @@ Chaudhary Enterprises LLC ("we", "us", "our") operates chaudharyenterprisesllc.c
 
 **Information you give us**
 
-- **Account details:** name, company name, business type, email address, phone number, password (stored only in encrypted, hashed form), and optional tax ID such as an EIN or resale certificate number.
+- **Account details:** name, company name, business type, email address, phone number, password, and optional tax ID such as an EIN or resale certificate number. Your account is saved in your own browser on your device; we receive these details only when you send us an order or a quote request.
 - **Order details:** billing and shipping addresses, products ordered, quantities, and order notes such as fulfilment-center delivery instructions.
 - **Quote requests and messages:** anything you send us through bulk-quote forms or by email or phone.
-- **Newsletter sign-ups:** your email address.
 
 **Information collected automatically**
 
 - Device and usage data such as IP address, browser type, pages visited, and the date and time of your visit.
 - Cookies and similar browser storage used to keep you signed in, remember your cart and wishlist, and keep the Site secure.
 
-**Payment information**
-
-Card payments are processed by our payment provider, Stripe. We never see or store your full card number. Stripe handles your payment data under its own privacy policy.
-
 ### 2. How we use your information
 
 - To create and manage your business account.
 - To process, ship, and invoice your orders, and to apply wholesale pricing and tax exemptions where valid.
 - To respond to quote requests, questions, and support messages.
-- To send order confirmations, shipping updates, and password-reset emails.
-- To send marketing emails if you subscribed. You can unsubscribe at any time using the link in any email.
+- To send order confirmations and shipping updates.
 - To prevent fraud, protect the Site, and meet our legal and tax obligations.
 
 ### 3. How we share your information
 
 We do not sell or rent your personal information. We share it only with service providers who help us run our business, and only as much as they need:
 
-- **Payment processing:** Stripe.
-- **Website hosting and database:** our hosting and database providers.
-- **Email delivery:** our transactional email provider.
+- **Website hosting:** our hosting provider.
+- **Email delivery:** our email provider.
 - **Shipping:** carriers and logistics partners who deliver your orders.
 - **Legal requirements:** government authorities when required by law, or to protect our rights, property, or safety.
 
@@ -50,7 +43,7 @@ We use essential cookies and local browser storage to keep you signed in, save y
 
 ### 5. How long we keep your information
 
-We keep account information while your account is open. We keep order and invoice records for as long as tax and accounting laws require, typically up to seven years. We delete or anonymise information we no longer need.
+Account details, your cart, wishlist and order history saved in your browser stay on your device until you delete them or clear your browser data. We keep the orders, quote requests and invoice records you send us for as long as tax and accounting laws require, typically up to seven years. We delete or anonymise information we no longer need.
 
 ### 6. Your rights
 
@@ -59,13 +52,12 @@ Depending on your state, you may have the right to:
 - Access the personal information we hold about you.
 - Correct inaccurate information.
 - Delete your information, subject to records we must keep by law.
-- Opt out of marketing emails at any time.
 
 You can update most account details yourself in My Account. For any other request, email admin@chaudharyenterprisesllc.com. We will respond within 30 days and may need to verify your identity first. We will not treat you differently for exercising these rights.
 
 ### 7. Security
 
-We use HTTPS encryption, hashed passwords, and access controls to protect your information. No method of transmission or storage is completely secure, so we cannot guarantee absolute security. Keep your password private and tell us right away if you think your account has been accessed without permission.
+We use HTTPS encryption to protect information you send us, and passwords saved in your browser are stored in hashed form. No method of transmission or storage is completely secure, so we cannot guarantee absolute security. Keep your password private and tell us right away if you think your account has been accessed without permission.
 
 ### 8. Children
 
@@ -73,7 +65,7 @@ The Site is for businesses only and is not directed to anyone under 18. We do no
 
 ### 9. Changes to this policy
 
-We may update this policy from time to time. We will post the new version on this page with a new effective date. If the changes are significant, we will notify account holders by email.
+We may update this policy from time to time. We will post the new version on this page with a new effective date.
 
 ### 10. Contact us
 

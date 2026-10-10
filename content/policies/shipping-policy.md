@@ -27,7 +27,7 @@ Delivery times are estimates from the carrier and are not guaranteed.
 
 ### 4. Shipping costs
 
-Shipping costs are calculated at checkout based on weight, size, and destination. [Orders over $X ship free within the contiguous US.] Freight orders may be quoted separately before shipping.
+Shipping costs are based on weight, size, and destination, and are confirmed in your order confirmation and invoice. [Orders over $X ship free within the contiguous US.] Freight orders may be quoted separately before shipping.
 
 ### 5. Shipping to fulfilment centers and warehouses
 
@@ -39,7 +39,7 @@ We can ship directly to third-party warehouses, prep centers, and marketplace fu
 
 ### 6. Tracking
 
-We email tracking details when your order ships. You can also see order status in My Account.
+We email tracking details when your order ships.
 
 ### 7. Inspecting your delivery
 

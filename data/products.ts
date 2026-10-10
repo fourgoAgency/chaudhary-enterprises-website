@@ -68,6 +68,14 @@ function toProduct(raw: SourceProduct, position: number): Product {
 
 export const products: Product[] = source.products.map(toProduct);
 
+/** Category names/descriptions from products.json override the defaults in data/categories.ts. */
+export const categoryOverrides = new Map(
+  source.categories.map((c) => {
+    if (!categorySlugs.has(c.slug)) throw new Error(`products.json: unknown category slug "${c.slug}"`);
+    return [c.slug, { name: c.name, description: c.description }] as const;
+  }),
+);
+
 for (const key of ["id", "slug", "sku"] as const) {
   const seen = new Set<string>();
   for (const p of products) {
